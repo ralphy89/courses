@@ -4,30 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon portfolio — démo cours</title>
-    <style>
-      body {
-        font-family: system-ui, sans-serif;
-        max-width: 40rem;
-        margin: 2rem auto;
-        padding: 0 1rem;
-        line-height: 1.5;
-      }
-      button {
-        margin-top: 1rem;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1 id="nom"></h1>
-    <p id="bio"></p>
+    <main class="page">
+      <article class="portfolio-card" id="portfolio-card">
+        <header class="portfolio-card__head">
+          <div class="avatar" id="avatar" aria-hidden="true"></div>
+          <div class="portfolio-card__intro">
+            <p class="portfolio-card__eyebrow">Fil rouge — JavaScript</p>
+            <h1 class="portfolio-card__name" id="nom"></h1>
+            <p class="portfolio-card__bio" id="bio"></p>
+          </div>
+        </header>
 
-    <h3>Mes compétences :</h3>
-    <ul id="skills"></ul>
+        <section class="portfolio-card__skills" aria-labelledby="skills-title">
+          <h2 id="skills-title" class="portfolio-card__skills-title">Compétences</h2>
+          <ul class="skill-tags" id="skills"></ul>
+        </section>
 
-    <button type="button" id="btn-portfolio">Afficher mon portfolio</button>
-
+        <footer class="portfolio-card__footer">
+          <button type="button" id="btn-portfolio" class="btn-primary">Afficher mon portfolio</button>
+        </footer>
+      </article>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
