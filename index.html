@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Club — Catalogue des cours</title>
+    <link rel="stylesheet" href="assets/home.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="hero">
+        <span class="eyebrow">Ressources pédagogiques</span>
+        <h1>Coding Club</h1>
+        <p>
+          Accès aux modules de formation. Chaque carte mène au sommaire et aux supports du cours correspondant.
+        </p>
+      </header>
+
+      <section aria-labelledby="courses-heading">
+        <h2 id="courses-heading" class="section-title">Cours</h2>
+        <div class="course-grid">
+          <article class="course-card">
+            <a class="course-card__link" href="cours%201/index.html">
+              <span class="course-card__badge">Module 1</span>
+              <h3>JavaScript — bases &amp; portfolio</h3>
+              <p>
+                Introduction, variables, tableaux, objets, manipulation du DOM et mini portfolio. Ateliers appareils
+                (formulaire &amp; stock).
+              </p>
+              <span class="course-card__cta">Ouvrir le cours</span>
+            </a>
+          </article>
+
+          <article class="course-card course-card--soon">
+            <div class="course-card__inner">
+              <span class="course-card__badge">À venir</span>
+              <h3>Prochain cours</h3>
+              <p>
+                Dupliquez le bloc de la carte ci-dessus dans <code>index.html</code> et pointez vers
+                <code>cours 2/index.html</code> (ou autre dossier) lorsque le module sera prêt.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <p class="footer-note">Dépôt : <a href="https://github.com/ralphy89/courses">github.com/ralphy89/courses</a></p>
+    </div>
+  </body>
+</html>
