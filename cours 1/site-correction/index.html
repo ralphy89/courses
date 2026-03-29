@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corrigé — Exercices appareils (variables, liste, objets)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <p class="page-banner" role="status">
+        <strong>Version corrigée</strong> — Page de référence pour les apprenants. Les blocs verts reprennent le code
+        commenté ; le script <code>index.js</code> sur cette page est entièrement fonctionnel.
+      </p>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercices JavaScript — Appareils électroniques</h1>
+          <p class="subtitle">
+            Même énoncé que le dossier envoyé aux élèves : ici tout fonctionne et le code source est visible.
+          </p>
+        </div>
+        <button type="button" class="btn-theme" id="theme-toggle" aria-pressed="false" aria-label="Changer le thème">
+          Mode clair
+        </button>
+      </header>
+
+      <h2 class="exo-title" id="exo1">Exercice 1 — Variables et formulaire</h2>
+      <p class="exo-lead">Lire le formulaire, variables, récapitulatif dans <code>#output</code>.</p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes">
+          <h2 id="consignes">Rappel</h2>
+          <ol>
+            <li><code>getElementById</code>, <code>.value</code>, <code>.checked</code>, <code>Number(...)</code></li>
+            <li>Template literal pour le texte affiché</li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="form-title">
+          <h2 id="form-title">Formulaire (démo)</h2>
+          <form id="device-form" novalidate>
+            <label for="device-name">Nom de l’appareil</label>
+            <input type="text" id="device-name" name="deviceName" placeholder="ex. : Galaxy S24" required />
+
+            <label for="brand">Marque</label>
+            <input type="text" id="brand" name="brand" placeholder="ex. : Samsung" required />
+
+            <label for="price">Prix (€)</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" placeholder="899.90" required />
+
+            <label for="category">Type</label>
+            <select id="category" name="category" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <div class="row-check">
+              <input type="checkbox" id="is-new" name="isNew" />
+              <label for="is-new">Appareil neuf</label>
+            </div>
+
+            <button type="submit">Enregistrer et afficher</button>
+          </form>
+
+          <div id="output" class="result" aria-live="polite"></div>
+
+          <div class="correction correction--deploy">
+            <strong>Code de référence — exercice 1</strong>
+            <pre><code>form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const nomAppareil = document.getElementById("device-name").value.trim();
+  const marque = document.getElementById("brand").value.trim();
+  const prix = Number(document.getElementById("price").value);
+  const type = document.getElementById("category").value;
+  const estNeuf = document.getElementById("is-new").checked;
+
+  const resume =
+    `Appareil : ${nomAppareil}\n` +
+    `Marque : ${marque}\n` +
+    `Prix : ${prix} €\n` +
+    `Type : ${type}\n` +
+    `Neuf : ${estNeuf ? "oui" : "non"}`;
+
+  document.getElementById("output").textContent = resume;
+});</code></pre>
+          </div>
+        </section>
+      </div>
+
+      <div class="section-divider" id="exo2">
+        <h2 class="exo-title">Exercice 2 — Liste et objets</h2>
+        <p class="exo-lead">Tableau <code>inventaire</code>, objets <code>{ nom, marque, prix, type }</code>, boucle d’affichage.</p>
+      </div>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes-2">
+          <h2 id="consignes-2">Rappel</h2>
+          <ol>
+            <li><code>push</code>, <code>reset()</code>, <code>innerHTML = ""</code></li>
+            <li>Boucle <code>for</code> + <code>createElement("li")</code></li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Stock (démo)</h2>
+          <form id="stock-form" novalidate>
+            <label for="stock-device-name">Nom de l’appareil</label>
+            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+
+            <label for="stock-brand">Marque</label>
+            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+
+            <label for="stock-price">Prix (€)</label>
+            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+
+            <label for="stock-category">Type</label>
+            <select id="stock-category" name="stockCategory" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <button type="submit">Ajouter au stock</button>
+          </form>
+
+          <p id="stock-count" aria-live="polite"></p>
+          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+
+          <div class="correction correction--deploy">
+            <strong>Code de référence — exercice 2</strong>
+            <pre><code>let inventaire = [];
+
+function afficherInventaire() {
+  const liste = document.getElementById("stock-list");
+  const compteur = document.getElementById("stock-count");
+  liste.innerHTML = "";
+  compteur.textContent = inventaire.length + " appareil(s) en stock";
+
+  for (let i = 0; i &lt; inventaire.length; i++) {
+    const a = inventaire[i];
+    const li = document.createElement("li");
+    li.textContent =
+      a.nom + " — " + a.marque + " — " + a.prix + " € — " + a.type;
+    liste.appendChild(li);
+  }
+}
+
+stockForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const appareil = {
+    nom: document.getElementById("stock-device-name").value.trim(),
+    marque: document.getElementById("stock-brand").value.trim(),
+    prix: Number(document.getElementById("stock-price").value),
+    type: document.getElementById("stock-category").value,
+  };
+  inventaire.push(appareil);
+  stockForm.reset();
+  afficherInventaire();
+});
+
+afficherInventaire();</code></pre>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>
+          Déployez ce dossier tel quel sur votre hébergement statique. Les élèves reçoivent uniquement le contenu du
+          dossier <code>templates-eleves</code> (sans corrigé fonctionnel).
+        </p>
+      </footer>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

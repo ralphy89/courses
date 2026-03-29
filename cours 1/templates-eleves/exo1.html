@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 1 — Variables et formulaire</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="index.html">← Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo2.html">Exercice 2 →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 1 — Variables et formulaire</h1>
+          <p class="subtitle">
+            Contexte : <strong>appareil électronique</strong>. Lire le formulaire et afficher un récapitulatif avec des
+            <strong>variables</strong> JavaScript.
+          </p>
+        </div>
+        <button type="button" class="btn-theme" id="theme-toggle" aria-pressed="false" aria-label="Changer le thème">
+          Mode clair
+        </button>
+      </header>
+
+      <p class="exo-lead">
+        Script à compléter : <code>exo1.js</code> (ce fichier HTML charge ce script en bas de page).
+      </p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes">
+          <h2 id="consignes">Consignes</h2>
+          <ol>
+            <li>Dans <code>exo1.js</code>, repérez le gestionnaire <code>submit</code> du formulaire.</li>
+            <li>
+              Pour chaque champ, une variable (<code>const</code> ou <code>let</code>) qui lit
+              <code>.value</code> (ex. <code>document.getElementById("device-name")</code>).
+            </li>
+            <li>Prix : <code>Number(...)</code> ou <code>parseFloat(...)</code>.</li>
+            <li>Case « Appareil neuf » : <code>.checked</code> (booléen).</li>
+            <li>Récapitulatif dans <code>#output</code> avec <code>textContent</code> (template literal conseillé).</li>
+            <li>Le thème clair / sombre est déjà géré dans <code>exo1.js</code> (bonus).</li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="form-title">
+          <h2 id="form-title">Formulaire</h2>
+          <form id="device-form" novalidate>
+            <label for="device-name">Nom de l’appareil</label>
+            <input type="text" id="device-name" name="deviceName" placeholder="ex. : Galaxy S24" required />
+
+            <label for="brand">Marque</label>
+            <input type="text" id="brand" name="brand" placeholder="ex. : Samsung" required />
+
+            <label for="price">Prix (€)</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" placeholder="899.90" required />
+
+            <label for="category">Type</label>
+            <select id="category" name="category" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <div class="row-check">
+              <input type="checkbox" id="is-new" name="isNew" />
+              <label for="is-new">Appareil neuf</label>
+            </div>
+
+            <button type="submit">Enregistrer et afficher</button>
+          </form>
+
+          <div id="output" class="result" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <footer>
+        <p>
+          Ce dossier : <code>exo1.html</code>, <code>exo1.js</code>, <code>style.css</code> (commun) +
+          <a href="exo2.html">exo2</a>.
+        </p>
+   
+      </footer>
+    </div>
+
+    <script src="exo1.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+================================================================================
+  Cours 1 — structure, page principale et déploiement
+================================================================================
+
+PAGE PRINCIPALE DU COURS (sommaire + contenu pédagogique)
+  - Ouvrez : index.html  (à la racine du dossier cours 1/)
+  - Feuille de style : assets/course.css
+  - Liens relatifs vers : portfolio-demo/, templates-eleves/, atelier-formateur/, site-correction/
+
+MINI PORTFOLIO (fil rouge du cours, HTML + JS)
+  - Dossier : portfolio-demo/  (index.html + script.js)
+
+--------------------------------------------------------------------------------
+  Exercices « appareils » — déploiement (formateur) et envoi aux élèves
+--------------------------------------------------------------------------------
+
+1) PAGE AVEC CORRECTION SUR VOTRE SITE
+   - Uploadez tout le contenu du dossier :  site-correction/
+     (fichiers : index.html, style.css, index.js)
+   - Sur l’hébergement, les trois fichiers doivent rester dans le MÊME dossier.
+   - Exemple d’URL : https://votre-site.fr/cours/js-appareils/
+   - Ouvrez cette URL dans le navigateur : les formulaires doivent fonctionner
+     (récap + liste de stock).
+
+2) TEMPLATES POUR LES ÉLÈVES (sans corrigé dans le JS)
+   - Compressez le dossier :  templates-eleves/
+     (index.html, exo1.html, exo1.js, exo2.html, exo2.js, style.css)
+   - Envoyez le ZIP (ou les fichiers) par mail / LMS.
+   - Dans templates-eleves/index.html, remplacez l’URL du lien en bas de page
+     (recherchez VOTRE-SITE.fr) par l’adresse réelle de votre page déployée
+     (celle du dossier site-correction).
+
+3) COPIE DE TRAVAIL FORMATEUR (pastilles « afficher correction »)
+   - Dossier : atelier-formateur/  (index.html, style.css, index.js)
+   - Modifiez ici si besoin, puis recopiez vers templates-eleves / site-correction.
+
+================================================================================

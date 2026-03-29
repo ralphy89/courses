@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript — Introduction, Variables, Tableaux et Objets</title>
+  <link rel="stylesheet" href="assets/course.css" />
+</head>
+<body>
+  <div class="layout">
+    <header class="hero">
+      <span class="eyebrow">Cours pratique • Développement web • Débutant</span>
+      <h1>JavaScript — Introduction, variables, tableaux, objets et mini portfolio</h1>
+      <p>
+        Un cours moderne, progressif et orienté pratique pour apprendre les bases de JavaScript en construisant
+        un portfolio simple, propre et dynamique. L’objectif est d’appliquer chaque concept directement dans un projet web.
+      </p>
+
+      <div class="hero-grid">
+        <div class="card pad">
+          <h3>Ce que vous allez apprendre</h3>
+          <div class="tag-row">
+            <span class="tag">Variables</span>
+            <span class="tag">Tableaux</span>
+            <span class="tag">Objets</span>
+            <span class="tag">DOM</span>
+            <span class="tag">Boucles</span>
+            <span class="tag">Projet web</span>
+          </div>
+          <div class="info" style="margin-top:18px;">
+            Ce cours est pensé pour une formation intense. Chaque notion est reliée à un mini projet concret : un portfolio dynamique.
+          </div>
+        </div>
+
+        <div class="card pad">
+          <h3>Objectifs</h3>
+          <div class="quick-list">
+            <div class="quick-item">
+              <strong>Comprendre JavaScript</strong>
+              Voir son rôle dans une page web moderne.
+            </div>
+            <div class="quick-item">
+              <strong>Manipuler les données</strong>
+              Stocker du texte, des listes et des profils.
+            </div>
+            <div class="quick-item">
+              <strong>Afficher du contenu</strong>
+              Injecter des données dans la page avec JavaScript.
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="section-grid">
+      <aside class="card sidebar">
+        <h3>Sommaire</h3>
+        <nav class="nav-links">
+          <a href="#intro">1. Introduction</a>
+          <a href="#projet">2. Projet fil rouge</a>
+          <a href="#variables">3. Variables</a>
+          <a href="#tableaux">4. Tableaux</a>
+          <a href="#objets">5. Objets</a>
+          <a href="#dom">6. DOM</a>
+          <a href="#portfolio">7. Code final</a>
+          <a href="#exercices">8. Exercices</a>
+          <a href="#projets">8b. Exercices (GitHub + corrigé)</a>
+          <a href="#suite">9. Aller plus loin</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section id="intro" class="card">
+          <h2>1. Introduction à JavaScript</h2>
+          <p>
+            JavaScript est le langage qui permet d’ajouter de la logique et de l’interactivité à une page web.
+            Avec HTML, on structure le contenu. Avec CSS, on améliore l’apparence. Avec JavaScript, on rend la page vivante.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Technologie</th>
+                <th>Rôle</th>
+                <th>Image simple</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HTML</td>
+                <td>Structure de la page</td>
+                <td>Le squelette</td>
+              </tr>
+              <tr>
+                <td>CSS</td>
+                <td>Style et design</td>
+                <td>Les vêtements</td>
+              </tr>
+              <tr>
+                <td>JavaScript</td>
+                <td>Comportement et interaction</td>
+                <td>Le mouvement</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h4>Où exécuter le code ?</h4>
+              <p>Dans le navigateur, via la console et les fichiers <code>.js</code> liés à votre page HTML.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Premier test</h4>
+              <pre><code>console.log("Bonjour JavaScript !");</code></pre>
+            </div>
+          </div>
+
+          <div class="success">
+            Utilisez <strong>F12</strong> puis l’onglet <strong>Console</strong> pour voir vos messages et tester rapidement votre code.
+          </div>
+        </section>
+
+        <section id="projet" class="card">
+          <h2>2. Projet fil rouge — Créer un portfolio dynamique</h2>
+          <p>
+            Au lieu d’apprendre les notions de manière isolée, nous allons construire un petit portfolio interactif.
+            Chaque concept sera appliqué dans ce projet.
+          </p>
+
+          <h3>Fonctionnalités du projet</h3>
+          <ul>
+            <li>Afficher un nom et une bio</li>
+            <li>Afficher une liste de compétences</li>
+            <li>Regrouper les informations dans un objet</li>
+            <li>Utiliser JavaScript pour remplir la page</li>
+          </ul>
+
+          <div class="info mt-18">
+            <strong>Démo dans ce dépôt</strong> — ouvrez
+            <a href="portfolio-demo/index.html">portfolio-demo/index.html</a>
+            (fichiers <code>index.html</code> + <code>script.js</code>), même logique que ci-dessous.
+          </div>
+
+          <h3>Structure HTML de base</h3>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;title&gt;Mon Portfolio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 id="nom"&gt;&lt;/h1&gt;
+  &lt;p id="bio"&gt;&lt;/p&gt;
+
+  &lt;h3&gt;Mes compétences :&lt;/h3&gt;
+  &lt;ul id="skills"&gt;&lt;/ul&gt;
+
+  &lt;button onclick="afficherPortfolio()"&gt;Afficher mon portfolio&lt;/button&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+          <div class="info">
+            Dans ce projet, les données du portfolio seront injectées dans la page avec JavaScript.
+          </div>
+        </section>
+
+        <section id="variables" class="card">
+          <h2>3. Les variables</h2>
+          <p>
+            Une variable permet de stocker une information. En JavaScript, on utilise surtout <code>let</code> et <code>const</code>.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Mot-clé</th>
+                <th>Utilisation</th>
+                <th>Réassignable ?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>let</code></td>
+                <td>Variable qui peut changer</td>
+                <td>Oui</td>
+              </tr>
+              <tr>
+                <td><code>const</code></td>
+                <td>Valeur fixe ou référence stable</td>
+                <td>Non</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Exemple simple</h3>
+          <pre><code>let nom = "Ralph";
+let bio = "Développeur web débutant";
+
+console.log(nom);
+console.log(bio);</code></pre>
+
+          <h3>Application dans le projet</h3>
+          <p>
+            Ces variables vont contenir les premières informations du portfolio.
+          </p>
+          <pre><code>let nom = "Ralph";
+let bio = "Développeur web débutant";</code></pre>
+
+          <div class="warning">
+            Une variable ne sert pas seulement à stocker une valeur. Elle permet de réutiliser cette valeur plus tard dans le projet.
+          </div>
+        </section>
+
+        <section id="tableaux" class="card">
+          <h2>4. Les tableaux</h2>
+          <p>
+            Un tableau permet de stocker plusieurs valeurs dans une seule variable. C’est idéal pour représenter une liste,
+            comme des compétences dans un portfolio.
+          </p>
+
+          <h3>Exemple</h3>
+          <pre><code>let skills = ["HTML", "CSS", "JavaScript"];
+
+console.log(skills);
+console.log(skills[0]); // HTML</code></pre>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h4>Pourquoi un tableau ?</h4>
+              <p>Parce qu’un portfolio contient souvent plusieurs compétences, plusieurs projets ou plusieurs liens.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Idée clé</h4>
+              <p>Un tableau regroupe des éléments similaires que l’on peut parcourir plus facilement.</p>
+            </div>
+          </div>
+
+          <h3>Application dans le projet</h3>
+          <pre><code>let skills = ["HTML", "CSS", "JavaScript"];</code></pre>
+
+          <p>
+            Chaque élément du tableau représente une compétence que l’on affichera dans la page.
+          </p>
+        </section>
+
+        <section id="objets" class="card">
+          <h2>5. Les objets</h2>
+          <p>
+            Un objet permet de regrouper plusieurs informations liées dans une seule structure. C’est parfait pour modéliser un profil.
+          </p>
+
+          <h3>Exemple</h3>
+          <pre><code>let profil = {
+  nom: "Ralph",
+  bio: "Développeur web débutant",
+  ville: "Gonaïves"
+};
+
+console.log(profil.nom);
+console.log(profil.ville);</code></pre>
+
+          <h3>Application dans le projet</h3>
+          <p>
+            Au lieu de créer plusieurs variables séparées, on regroupe toutes les informations principales dans un seul objet.
+          </p>
+          <pre><code>let profil = {
+  nom: "Ralph",
+  bio: "Développeur web débutant",
+  ville: "Gonaïves"
+};</code></pre>
+
+          <div class="success">
+            Un objet est utile quand plusieurs informations appartiennent à la même entité. Ici, l’entité est le profil.
+          </div>
+        </section>
+
+        <section id="dom" class="card">
+          <h2>6. Manipuler le DOM</h2>
+          <p>
+            Le DOM représente la page HTML sous forme d’objets manipulables. Avec JavaScript, on peut sélectionner des éléments,
+            modifier leur texte, créer de nouveaux éléments et les ajouter dans la page.
+          </p>
+
+          <h3>Fonction principale du projet</h3>
+          <pre><code>function afficherPortfolio() {
+  document.getElementById("nom").textContent = profil.nom;
+  document.getElementById("bio").textContent = profil.bio;
+
+  let liste = document.getElementById("skills");
+  liste.innerHTML = "";
+
+  for (let i = 0; i &lt; skills.length; i++) {
+    let li = document.createElement("li");
+    li.textContent = skills[i];
+    liste.appendChild(li);
+  }
+}</code></pre>
+
+          <h3>Explication</h3>
+          <ul>
+            <li><code>getElementById()</code> sélectionne un élément HTML</li>
+            <li><code>textContent</code> modifie le texte affiché</li>
+            <li><code>createElement()</code> crée un nouvel élément HTML</li>
+            <li><code>appendChild()</code> ajoute cet élément dans la page</li>
+          </ul>
+
+          <div class="info">
+            C’est ici que JavaScript devient visible pour l’utilisateur. Les données quittent le code et apparaissent dans l’interface.
+          </div>
+        </section>
+
+        <section id="portfolio" class="card">
+          <h2>7. Code final du mini portfolio</h2>
+          <p>
+            Voici une version complète du script JavaScript pour le projet.
+          </p>
+
+          <pre><code>let profil = {
+  nom: "Ralph",
+  bio: "Développeur web débutant",
+  ville: "Gonaïves"
+};
+
+let skills = ["HTML", "CSS", "JavaScript"];
+
+function afficherPortfolio() {
+  document.getElementById("nom").textContent = profil.nom;
+  document.getElementById("bio").textContent = profil.bio + " • " + profil.ville;
+
+  let liste = document.getElementById("skills");
+  liste.innerHTML = "";
+
+  for (let i = 0; i &lt; skills.length; i++) {
+    let li = document.createElement("li");
+    li.textContent = skills[i];
+    liste.appendChild(li);
+  }
+}</code></pre>
+
+          <h3>Étapes du fonctionnement</h3>
+          <ol class="steps">
+            <li>L’utilisateur clique sur le bouton.</li>
+            <li>La fonction <code>afficherPortfolio()</code> est exécutée.</li>
+            <li>Le nom et la bio sont injectés dans la page.</li>
+            <li>Les compétences sont parcourues puis ajoutées à la liste.</li>
+          </ol>
+        </section>
+
+        <section id="exercices" class="card">
+          <h2>8. Exercices pratiques</h2>
+          <p>
+            Pour mieux retenir, modifiez le projet vous-même.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <h4>Exercice 1</h4>
+              <p>Remplacez les informations du profil par les vôtres.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Exercice 2</h4>
+              <p>Ajoutez au moins deux nouvelles compétences dans le tableau.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Exercice 3</h4>
+              <p>Ajoutez une propriété <code>profession</code> dans l’objet <code>profil</code>.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Exercice 4</h4>
+              <p>Affichez un message du type : <code>Je suis développeur à Gonaïves</code>.</p>
+            </div>
+          </div>
+
+          <div class="warning">
+            Le but n’est pas seulement de recopier le code, mais de le modifier, le casser, le corriger et comprendre ce qu’il fait.
+          </div>
+          <h3 id="projets">Exercices appareils — GitHub &amp; version corrigée</h3>
+          <p class="projets-footnote">
+            Dépôt GitHub :
+            <a href="https://github.com/ralphy89/courses">github.com/ralphy89/courses</a>
+            — les liens fichiers ci-dessous seront actifs après votre premier push, avec la structure
+            <code>cours 1/templates-eleves/</code> sur la branche <code>main</code>.
+          </p>
+          <ul class="projets-liste">
+            <li>
+              <strong>Exercice 1 — Variables et formulaire</strong><br />
+              Dépôt :
+              <a href="https://github.com/ralphy89/courses/blob/main/cours%201/templates-eleves/exo1.html">exo1.html</a>
+              ·
+              <a href="https://github.com/ralphy89/courses/blob/main/cours%201/templates-eleves/exo1.js">exo1.js</a>
+              — corrigé :
+              <a href="site-correction/index.html#exo1">ouvrir la version corrigée</a>
+            </li>
+            <li>
+              <strong>Exercice 2 — Stock (tableau d’objets)</strong><br />
+              Dépôt :
+              <a href="https://github.com/ralphy89/courses/blob/main/cours%201/templates-eleves/exo2.html">exo2.html</a>
+              ·
+              <a href="https://github.com/ralphy89/courses/blob/main/cours%201/templates-eleves/exo2.js">exo2.js</a>
+              — corrigé :
+              <a href="site-correction/index.html#exo2">ouvrir la version corrigée</a>
+            </li>
+          </ul>
+
+
+        </section>
+
+        <section id="suite" class="card">
+          <h2>9. Aller plus loin</h2>
+          <p>
+            Une fois ce mini projet maîtrisé, vous pouvez l’améliorer avec davantage d’interactions et un design plus avancé.
+          </p>
+
+          <ul>
+            <li>Ajouter une photo de profil</li>
+            <li>Ajouter des liens vers GitHub ou LinkedIn</li>
+            <li>Permettre à l’utilisateur de saisir ses données avec des champs <code>input</code></li>
+            <li>Ajouter des conditions pour afficher un message différent selon le nombre de compétences</li>
+            <li>Créer une vraie section projets</li>
+          </ul>
+
+          <div class="success">
+            Ce petit portfolio est une excellente base pour entrer dans le développement web moderne avec une logique pratique.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="footer">
+      Cours HTML stylisé — moderne, professionnel et prêt à publier.
+    </div>
+  </div>
+</body>
+</html>

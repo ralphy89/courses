@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercices 1 &amp; 2 — Variables, liste et objets (appareils)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercices JavaScript — Appareils électroniques</h1>
+          <p class="subtitle">
+            Contexte : <strong>appareils électroniques</strong>. Ex. 1 : variables et formulaire. Ex. 2 : plusieurs
+            appareils dans un <strong>tableau</strong>, chacun décrit par un <strong>objet</strong>.
+          </p>
+        </div>
+        <button type="button" class="btn-theme" id="theme-toggle" aria-pressed="false" aria-label="Changer le thème">
+          Mode clair
+        </button>
+      </header>
+
+      <h2 class="exo-title" id="exo1">Exercice 1 — Variables et formulaire</h2>
+      <p class="exo-lead">
+        Lire les champs d’un formulaire et les stocker dans des variables.
+      </p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes">
+          <h2 id="consignes">Consignes (formateur / élève)</h2>
+          <ol>
+            <li>Dans le fichier <code>index.js</code>, repérez le gestionnaire <code>submit</code> du formulaire principal.</li>
+            <li>
+              Pour chaque champ, créez une variable (<code>const</code> ou <code>let</code>) qui lit
+              <code>.value</code> sur l’élément correspondant (ex. <code>document.getElementById("device-name")</code>).
+            </li>
+            <li>
+              Pour le prix, convertissez le texte en nombre avec <code>Number(...)</code> ou <code>parseFloat(...)</code>.
+            </li>
+            <li>
+              Pour la case « Appareil neuf », utilisez <code>.checked</code> (booléen <code>true</code> /
+              <code>false</code>).
+            </li>
+            <li>Construisez une chaîne (template literal) et affichez-la dans <code>#output</code> avec <code>textContent</code>.</li>
+            <li>Option : affichez aussi les variables dans la console avec <code>console.log</code>.</li>
+            <li>
+              Bonus (déjà câblé dans le script) : bouton <strong>Mode clair</strong> — une variable booléenne et
+              <code>document.documentElement.setAttribute("data-theme", "light")</code> pour changer les couleurs de la
+              page.
+            </li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="form-title">
+          <h2 id="form-title">Formulaire</h2>
+          <form id="device-form" novalidate>
+            <label for="device-name">Nom de l’appareil</label>
+            <input type="text" id="device-name" name="deviceName" placeholder="ex. : Galaxy S24" required />
+
+            <label for="brand">Marque</label>
+            <input type="text" id="brand" name="brand" placeholder="ex. : Samsung" required />
+
+            <label for="price">Prix (€)</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" placeholder="899.90" required />
+
+            <label for="category">Type</label>
+            <select id="category" name="category" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <div class="row-check">
+              <input type="checkbox" id="is-new" name="isNew" />
+              <label for="is-new">Appareil neuf</label>
+            </div>
+
+            <button type="submit">Enregistrer et Afficher</button>
+          </form>
+
+          <div id="output" class="result" aria-live="polite"></div>
+
+          <div class="toggle-wrap">
+            <button type="button" class="ghost" id="toggle-correction" aria-expanded="false">
+              Afficher une correction possible (script)
+            </button>
+            <div class="correction" id="correction-block">
+              <strong>Exemple de cœur du script</strong>
+              <pre><code>form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const nomAppareil = document.getElementById("device-name").value.trim();
+  const marque = document.getElementById("brand").value.trim();
+  const prix = Number(document.getElementById("price").value);
+  const type = document.getElementById("category").value;
+  const estNeuf = document.getElementById("is-new").checked;
+
+  const resume =
+    `Appareil : ${nomAppareil}\n` +
+    `Marque : ${marque}\n` +
+    `Prix : ${prix} €\n` +
+    `Type : ${type}\n` +
+    `Neuf : ${estNeuf ? "oui" : "non"}`;
+
+  document.getElementById("output").textContent = resume;
+  console.log({ nomAppareil, marque, prix, type, estNeuf });
+});</code></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="section-divider" id="exo2">
+        <h2 class="exo-title">Exercice 2 — Liste (tableau) et objets</h2>
+        <p class="exo-lead">
+          Regrouper plusieurs appareils dans un <strong>tableau</strong> ; chaque appareil est un <strong>objet</strong>
+          <code>{ nom, marque, prix, type }</code>. Ajouter au stock puis réafficher la liste.
+        </p>
+      </div>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes-2">
+          <h2 id="consignes-2">Consignes (formateur / élève)</h2>
+          <ol>
+            <li>
+              Dans <code>index.js</code>, section <strong>Exercice 2</strong>, créez un tableau vide
+              <code>let inventaire = []</code> (ou avec quelques objets de démo).
+            </li>
+            <li>
+              Sur envoi du formulaire « Ajouter au stock », construisez un <strong>objet littéral</strong> avec les
+              propriétés <code>nom</code>, <code>marque</code>, <code>prix</code> (nombre), <code>type</code> (chaîne).
+            </li>
+            <li>Ajoutez cet objet au tableau avec <code>.push(...)</code>.</li>
+            <li>
+              Écrivez une fonction <code>afficherInventaire()</code> qui vide la liste HTML puis parcourt le tableau
+              (boucle <code>for</code>) pour créer un <code>&lt;li&gt;</code> par appareil (texte lisible ou
+              <code>textContent</code>).
+            </li>
+            <li>Rappelez <code>afficherInventaire()</code> après chaque ajout.</li>
+            <li>Option : affichez <code>inventaire.length</code> quelque part (nombre d’articles en stock).</li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Stock (tableau d’objets)</h2>
+          <form id="stock-form" novalidate>
+            <label for="stock-device-name">Nom de l’appareil</label>
+            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+
+            <label for="stock-brand">Marque</label>
+            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+
+            <label for="stock-price">Prix (€)</label>
+            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+
+            <label for="stock-category">Type</label>
+            <select id="stock-category" name="stockCategory" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <button type="submit">Ajouter au stock</button>
+          </form>
+
+          <p id="stock-count" aria-live="polite"></p>
+          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+
+          <div class="toggle-wrap">
+            <button type="button" class="ghost" id="toggle-correction-2" aria-expanded="false">
+              Afficher une correction possible (liste + objets)
+            </button>
+            <div class="correction" id="correction-block-2">
+              <strong>Exemple — tableau, objet, push, boucle</strong>
+              <pre><code>let inventaire = [];
+
+function afficherInventaire() {
+  const liste = document.getElementById("stock-list");
+  const compteur = document.getElementById("stock-count");
+  liste.innerHTML = "";
+  compteur.textContent = inventaire.length + " appareil(s) en stock";
+
+  for (let i = 0; i &lt; inventaire.length; i++) {
+    const a = inventaire[i];
+    const li = document.createElement("li");
+    li.textContent =
+      a.nom + " — " + a.marque + " — " + a.prix + " € — " + a.type;
+    liste.appendChild(li);
+  }
+}
+
+document.getElementById("stock-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const appareil = {
+    nom: document.getElementById("stock-device-name").value.trim(),
+    marque: document.getElementById("stock-brand").value.trim(),
+    prix: Number(document.getElementById("stock-price").value),
+    type: document.getElementById("stock-category").value,
+  };
+  inventaire.push(appareil);
+  document.getElementById("stock-form").reset();
+  afficherInventaire();
+});</code></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>
+          Fichiers : <code>index.html</code>, <code>style.css</code>, <code>index.js</code>.
+        </p>
+      </footer>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

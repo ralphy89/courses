@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 2 — Liste (tableau) et objets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="index.html">← Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo1.html">← Exercice 1</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 2 — Liste (tableau) et objets</h1>
+          <p class="subtitle">
+            Plusieurs appareils dans un <strong>tableau</strong> ; chaque entrée est un <strong>objet</strong>
+            <code>{ nom, marque, prix, type }</code>.
+          </p>
+        </div>
+      </header>
+
+      <p class="exo-lead">
+        Script à compléter : <code>exo2.js</code>.
+      </p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes-2">
+          <h2 id="consignes-2">Consignes</h2>
+          <ol>
+            <li><code>let inventaire = []</code> dans <code>exo2.js</code>.</li>
+            <li>À la soumission : construire un objet, <code>inventaire.push(appareil)</code>, <code>reset()</code> du formulaire.</li>
+            <li>Fonction <code>afficherInventaire()</code> : vider <code>#stock-list</code>, boucle <code>for</code>, un <code>&lt;li&gt;</code> par article.</li>
+            <li>Afficher <code>inventaire.length</code> dans <code>#stock-count</code>.</li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Stock (tableau d’objets)</h2>
+          <form id="stock-form" novalidate>
+            <label for="stock-device-name">Nom de l’appareil</label>
+            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+
+            <label for="stock-brand">Marque</label>
+            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+
+            <label for="stock-price">Prix (€)</label>
+            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+
+            <label for="stock-category">Type</label>
+            <select id="stock-category" name="stockCategory" required>
+              <option value="">— Choisir —</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="laptop">Ordinateur portable</option>
+              <option value="tablet">Tablette</option>
+              <option value="console">Console de jeu</option>
+              <option value="audio">Audio / casque</option>
+              <option value="other">Autre</option>
+            </select>
+
+            <button type="submit">Ajouter au stock</button>
+          </form>
+
+          <p id="stock-count" aria-live="polite"></p>
+          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+        </section>
+      </div>
+
+      <footer>
+        <p>
+          Ce dossier : <code>exo2.html</code>, <code>exo2.js</code>, <code>style.css</code> (commun) +
+          <a href="exo1.html">exo1</a>.
+        </p>
+        <p class="footer-link-corrige">
+          Démonstration &amp; correction :
+          <a href="https://VOTRE-SITE.fr/chemin/vers/correction/">version corrigée</a>
+        </p>
+      </footer>
+    </div>
+
+    <script src="exo2.js"></script>
+  </body>
+</html>
