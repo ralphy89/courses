@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript — Fonctions &amp; conditions</title>
+    <link rel="stylesheet" href="assets/course.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="hero">
+        <span class="eyebrow">Cours JavaScript • 2 h • Débutant → intermédiaire</span>
+        <h1>Fonctions &amp; conditions</h1>
+        <p>
+          Maîtrisez les bases du JavaScript moderne : fonctions déclaratives, expressions, fléchées, conditions
+          <code>if</code>/<code>else</code>, <code>switch</code>, opérateur ternaire, valeurs truthy/falsy, puis exercices
+          corrigés. Contenu issu du support <cite>JS_Fonctions_Conditions</cite>.
+        </p>
+
+        <div class="hero-grid">
+          <div class="card pad">
+            <h3>Thèmes</h3>
+            <div class="tag-row">
+              <span class="tag">Fonctions</span>
+              <span class="tag">Arrow functions</span>
+              <span class="tag">Scope</span>
+              <span class="tag">if / else</span>
+              <span class="tag">switch</span>
+              <span class="tag">Ternaire</span>
+              <span class="tag">Callbacks</span>
+            </div>
+            <div class="info mt-18">
+              Durée indicative : Partie 1 (45 min), Partie 2 (40 min), Partie 3 (20 min), exercices (15 min).
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h3>Plan</h3>
+            <div class="quick-list">
+              <div class="quick-item">
+                <strong>Partie 1</strong>
+                Déclarations, expressions, flèches, portée, rest &amp; callbacks.
+              </div>
+              <div class="quick-item">
+                <strong>Partie 2</strong>
+                Conditions, opérateurs, <code>switch</code>, ternaire, truthy/falsy.
+              </div>
+              <div class="quick-item">
+                <strong>Parties 3 &amp; 4</strong>
+                Exemples combinés + exercices et solutions.
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="section-grid">
+        <aside class="card sidebar">
+          <h3>Sommaire</h3>
+          <nav class="nav-links">
+            <a href="#intro">Introduction</a>
+            <a href="#partie1">1. Les fonctions</a>
+            <a href="#partie2">2. Les conditions</a>
+            <a href="#partie3">3. Fonctions + conditions</a>
+            <a href="#partie4">4. Exercices</a>
+            <a href="#solutions">5. Solutions</a>
+            <a href="#recap">6. Récap &amp; suite</a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section id="intro" class="card">
+            <h2>Introduction</h2>
+            <p>
+              Ce cours prolonge les bases (variables, tableaux, objets) en structurant la logique avec des
+              <strong>fonctions réutilisables</strong> et des <strong>branchements conditionnels</strong>. Tout le code peut être testé
+              dans la console du navigateur (F12) ou dans un fichier <code>.js</code>.
+            </p>
+            <div class="success">
+              Préférez <code>===</code> et <code>!==</code> aux comparaisons souples <code>==</code> / <code>!=</code> pour éviter les conversions de type
+              surprenantes.
+            </div>
+          </section>
+
+          <section id="partie1" class="card">
+            <h2>1. Les fonctions</h2>
+            <p>
+              Une fonction est un bloc de code réutilisable qui exécute une tâche précise. Elle peut recevoir des
+              paramètres, les traiter et retourner un résultat.
+            </p>
+
+            <h3>1.1 — Déclaration (<code>function</code>)</h3>
+            <p>
+              Syntaxe classique. La fonction est <strong>hoistée</strong> : vous pouvez l’appeler avant sa définition dans le fichier.
+            </p>
+            <pre><code>function nomDeLaFonction(parametre1, parametre2) {
+  return resultat;
+}
+
+function saluer(prenom) {
+  return "Bonjour, " + prenom + " !";
+}
+console.log(saluer("Alice"));
+console.log(saluer("Bob"));</code></pre>
+            <div class="info">
+              Le mot-clé <code>return</code> termine la fonction et renvoie une valeur. Sans <code>return</code>, la valeur retournée est
+              <code>undefined</code>.
+            </div>
+
+            <h3>Paramètres multiples et valeurs par défaut (ES6+)</h3>
+            <pre><code>function additionner(a, b) {
+  return a + b;
+}
+
+function presenter(nom, age = 18, ville = "Inconnue") {
+  return nom + " a " + age + " ans, habite " + ville;
+}
+console.log(additionner(5, 3));
+console.log(presenter("Luc"));
+console.log(presenter("Ana", 25, "Paris"));</code></pre>
+
+            <h3>1.2 — Expression de fonction</h3>
+            <p>La fonction est assignée à une variable. Elle n’est <strong>pas hoistée</strong> : définissez-la avant de l’utiliser.</p>
+            <pre><code>const multiplier = function (a, b) {
+  return a * b;
+};
+const carre = function (n) {
+  return n * n;
+};
+
+function appliquer(fn, valeur) {
+  return fn(valeur);
+}
+console.log(appliquer(carre, 5));</code></pre>
+
+            <h3>1.3 — Fonctions fléchées (ES6+)</h3>
+            <pre><code>const diviser = (a, b) => {
+  return a / b;
+};
+const doubler = (n) => n * 2;
+const somme = (a, b) => a + b;
+const direBonjour = () => "Bonjour le monde !";</code></pre>
+            <p class="tag-row" style="margin-top: 0">
+              <span class="tag">Une expression → accolades et <code>return</code> optionnels</span>
+            </p>
+
+            <h3>Tableau comparatif</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Syntaxe</th>
+                  <th>Hoisting</th>
+                  <th>Usage typique</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Déclaration <code>function</code></td>
+                  <td>Oui</td>
+                  <td>Fonctions utilitaires « globales » au module</td>
+                </tr>
+                <tr>
+                  <td>Expression</td>
+                  <td>Non</td>
+                  <td>Callbacks, assignation conditionnelle</td>
+                </tr>
+                <tr>
+                  <td>Arrow</td>
+                  <td>Non</td>
+                  <td>ES6+, callbacks, méthodes de tableau</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>1.4 — Portée (<code>scope</code>)</h3>
+            <pre><code>let messageGlobal = "Je suis global";
+
+function exempleScope() {
+  let messageLocal = "Je suis local";
+  console.log(messageGlobal);
+  console.log(messageLocal);
+}
+exempleScope();
+// console.log(messageLocal); // ERREUR hors de la fonction</code></pre>
+            <div class="warning">
+              Limitez les variables globales ; utilisez <code>const</code> et <code>let</code> dans la portée la plus étroite possible.
+            </div>
+
+            <h3>1.5 — Rest (<code>...</code>) et callbacks</h3>
+            <pre><code>function sommeTotal(...nombres) {
+  return nombres.reduce((acc, n) => acc + n, 0);
+}
+
+function traiterNombre(nombre, callback) {
+  const resultat = callback(nombre);
+  console.log("Résultat : " + resultat);
+}
+traiterNombre(5, (n) => n * 3);
+
+const nombres = [1, 2, 3, 4, 5];
+const doubles = nombres.map((n) => n * 2);
+console.log(doubles);</code></pre>
+          </section>
+
+          <section id="partie2" class="card">
+            <h2>2. Les conditions</h2>
+            <p>Les structures conditionnelles exécutent du code différent selon qu’une expression est vraie ou fausse.</p>
+
+            <h3>2.1 — <code>if</code>, <code>else if</code>, <code>else</code></h3>
+            <pre><code>function evaluerNote(note) {
+  if (note &gt;= 90) return "Excellent — A";
+  if (note &gt;= 80) return "Très bien — B";
+  if (note &gt;= 70) return "Bien — C";
+  if (note &gt;= 60) return "Passable — D";
+  return "Insuffisant — F";
+}</code></pre>
+
+            <h3>Opérateurs de comparaison et logiques</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Opérateur</th>
+                  <th>Signification</th>
+                  <th>Exemple</th>
+                  <th>Résultat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>==</code></td>
+                  <td>Égal (valeur)</td>
+                  <td><code>5 == "5"</code></td>
+                  <td><code>true</code></td>
+                </tr>
+                <tr>
+                  <td><code>===</code></td>
+                  <td>Égal (valeur + type)</td>
+                  <td><code>5 === "5"</code></td>
+                  <td><code>false</code></td>
+                </tr>
+                <tr>
+                  <td><code>!=</code> / <code>!==</code></td>
+                  <td>Différent</td>
+                  <td><code>5 !== "5"</code></td>
+                  <td><code>true</code></td>
+                </tr>
+                <tr>
+                  <td><code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code></td>
+                  <td>Ordre</td>
+                  <td><code>10 &gt; 5</code></td>
+                  <td><code>true</code></td>
+                </tr>
+                <tr>
+                  <td><code>&amp;&amp;</code> <code>||</code> <code>!</code></td>
+                  <td>ET / OU / NON</td>
+                  <td><code>true &amp;&amp; false</code></td>
+                  <td><code>false</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>2.2 — <code>switch</code></h3>
+            <pre><code>function nomDuJour(numero) {
+  switch (numero) {
+    case 1:
+      return "Lundi";
+    case 2:
+      return "Mardi";
+    case 7:
+      return "Dimanche";
+    default:
+      return "Numéro invalide (1-7)";
+  }
+}</code></pre>
+            <div class="warning">
+              Après chaque <code>case</code>, utilisez <code>break</code> ou <code>return</code>, sinon le flux « tombe » dans les <code>case</code> suivants
+              (<em>fall-through</em>).
+            </div>
+            <pre><code>function typeDeJour(jour) {
+  switch (jour.toLowerCase()) {
+    case "samedi":
+    case "dimanche":
+      return "Week-end";
+    case "lundi":
+    case "mardi":
+    case "mercredi":
+    case "jeudi":
+    case "vendredi":
+      return "Jour de semaine";
+    default:
+      return "Jour inconnu";
+  }
+}</code></pre>
+
+            <h3>2.3 — Opérateur ternaire</h3>
+            <pre><code>const age = 20;
+const statut = age &gt;= 18 ? "Majeur" : "Mineur";
+
+const estPair = (n) =&gt; (n % 2 === 0 ? "pair" : "impair");
+
+const note = 75;
+const mention =
+  note &gt;= 90 ? "Excellent" : note &gt;= 70 ? "Bien" : note &gt;= 50 ? "Passable" : "Insuffisant";</code></pre>
+            <p>Réservez les ternaires imbriqués aux cas vraiment courts ; sinon préférez <code>if</code>/<code>else</code>.</p>
+
+            <h3>2.4 — Truthy et falsy</h3>
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Falsy</h4>
+                <p><code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></p>
+              </div>
+              <div class="mini-card">
+                <h4>Truthy</h4>
+                <p>Tout le reste : nombres non nuls, chaînes non vides (y compris <code>"0"</code>), objets, tableaux, fonctions…</p>
+              </div>
+            </div>
+            <pre><code>function afficherNom(nom) {
+  if (nom) {
+    console.log("Nom : " + nom);
+  } else {
+    console.log("Aucun nom fourni");
+  }
+}</code></pre>
+          </section>
+
+          <section id="partie3" class="card">
+            <h2>3. Fonctions et conditions combinées</h2>
+
+            <h3>3.1 — Calcul d’IMC</h3>
+            <pre><code>function calculerIMC(poids, taille) {
+  if (poids &lt;= 0 || taille &lt;= 0) {
+    return "Valeurs invalides — poids et taille doivent être positifs";
+  }
+  const imc = poids / (taille * taille);
+  const imcArrondi = Math.round(imc * 10) / 10;
+  let categorie;
+  if (imc &lt; 18.5) categorie = "Insuffisance pondérale";
+  else if (imc &lt; 25) categorie = "Poids normal";
+  else if (imc &lt; 30) categorie = "Surpoids";
+  else categorie = "Obésité";
+  return `IMC : ${imcArrondi} — ${categorie}`;
+}</code></pre>
+
+            <h3>3.2 — Connexion simple</h3>
+            <pre><code>const utilisateurs = [
+  { login: "admin", motDePasse: "Admin123!" },
+  { login: "alice", motDePasse: "Alice456#" },
+  { login: "bob", motDePasse: "Bob789@" },
+];
+
+function seConnecter(login, motDePasse) {
+  if (!login || !motDePasse) {
+    return "Erreur : login et mot de passe requis";
+  }
+  const user = utilisateurs.find(
+    (u) =&gt; u.login === login &amp;&amp; u.motDePasse === motDePasse
+  );
+  return user
+    ? `Connexion réussie ! Bienvenue, ${user.login}`
+    : "Erreur : identifiants incorrects";
+}</code></pre>
+
+            <h3>3.3 — Jeu de devinette (closures)</h3>
+            <pre><code>const creerJeu = (nombreSecret, maxEssais = 5) =&gt; {
+  let essaisRestants = maxEssais;
+  const deviner = (nombre) =&gt; {
+    if (essaisRestants &lt;= 0) {
+      return "Partie terminée — plus d'essais disponibles";
+    }
+    essaisRestants--;
+    if (nombre === nombreSecret) {
+      return `Bravo ! Vous avez trouvé ${nombreSecret} !`;
+    }
+    if (nombre &lt; nombreSecret) {
+      return `Trop petit ! Il vous reste ${essaisRestants} essai(s)`;
+    }
+    return `Trop grand ! Il vous reste ${essaisRestants} essai(s)`;
+  };
+  return { deviner };
+};</code></pre>
+          </section>
+
+          <section id="partie4" class="card">
+            <h2>4. Exercices pratiques</h2>
+            <p>Essayez par vous-même avant de consulter les solutions.</p>
+
+            <h3>Exercice 1 — Convertisseur de température</h3>
+            <ul>
+              <li><code>celsiusVersFahrenheit(c)</code> : <code>F = C × 9/5 + 32</code></li>
+              <li><code>fahrenheitVersCelsius(f)</code> : <code>C = (F − 32) × 5/9</code></li>
+              <li><code>convertir(valeur, unite)</code> avec <code>'C'</code> ou <code>'F'</code></li>
+            </ul>
+            <pre><code>// Tests attendus
+console.log(convertir(100, "C")); // 212°F
+console.log(convertir(32, "F")); // 0°C</code></pre>
+
+            <h3>Exercice 2 — Vérificateur de mot de passe</h3>
+            <p>
+              Retourner <code>{ valide, message }</code> : longueur ≥ 8, au moins une majuscule, un chiffre, un caractère parmi
+              <code>!@#$%</code>.
+            </p>
+
+            <h3>Exercice 3 — Calculatrice</h3>
+            <p>
+              <code>calculer(a, operateur, b)</code> pour <code>+ - * / % **</code>, erreur si opérateur inconnu ou division par zéro.
+            </p>
+
+            <h3>Exercice 4 — Bulletin scolaire (bonus)</h3>
+            <p>
+              <code>bulletinScolaire({ nom, notes })</code> : moyenne, mention, commentaire, statut admis/recalé (seuil 10).
+            </p>
+          </section>
+
+          <section id="solutions" class="card">
+            <h2>5. Solutions (extraits)</h2>
+
+            <h3>Exercice 1</h3>
+            <pre><code>const celsiusVersFahrenheit = (c) =&gt; Math.round(((c * 9) / 5 + 32) * 10) / 10;
+const fahrenheitVersCelsius = (f) =&gt; Math.round((((f - 32) * 5) / 9) * 10) / 10;
+
+function convertir(valeur, unite) {
+  switch (unite.toUpperCase()) {
+    case "C":
+      return celsiusVersFahrenheit(valeur) + "°F";
+    case "F":
+      return fahrenheitVersCelsius(valeur) + "°C";
+    default:
+      return "Unité inconnue — utilisez C ou F";
+  }
+}</code></pre>
+
+            <h3>Exercice 2</h3>
+            <pre><code>function verifierMotDePasse(mdp) {
+  if (!mdp || mdp.length &lt; 8) {
+    return { valide: false, message: "Trop court (min. 8 caractères)" };
+  }
+  if (!/[A-Z]/.test(mdp)) return { valide: false, message: "Manque une majuscule" };
+  if (!/[0-9]/.test(mdp)) return { valide: false, message: "Manque un chiffre" };
+  if (!/[!@#$%]/.test(mdp)) {
+    return { valide: false, message: "Manque un caractère spécial (!@#$%)" };
+  }
+  return { valide: true, message: "Mot de passe valide !" };
+}</code></pre>
+
+            <h3>Exercice 3</h3>
+            <pre><code>function calculer(a, operateur, b) {
+  switch (operateur) {
+    case "+":
+      return a + b;
+    case "-":
+      return a - b;
+    case "*":
+      return a * b;
+    case "%":
+      return a % b;
+    case "**":
+      return Math.pow(a, b);
+    case "/":
+      if (b === 0) return "Erreur : division par zéro";
+      return a / b;
+    default:
+      return "Opérateur inconnu : " + operateur;
+  }
+}</code></pre>
+
+            <h3>Exercice 4 (structure)</h3>
+            <p>
+              Calculer la moyenne avec <code>reduce</code>, puis enchaîner <code>if</code>/<code>else if</code> pour mention et commentaire ; statut
+              <code>moyenne &gt;= 10 ? "Admis" : "Recalé"</code>.
+            </p>
+          </section>
+
+          <section id="recap" class="card">
+            <h2>6. Récapitulatif — aide-mémoire</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>Syntaxe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Déclaration</td>
+                  <td><code>function f(a, b) { return a + b; }</code></td>
+                </tr>
+                <tr>
+                  <td>Expression</td>
+                  <td><code>const f = function (a, b) { return a + b; };</code></td>
+                </tr>
+                <tr>
+                  <td>Arrow</td>
+                  <td><code>const f = (a, b) =&gt; a + b;</code></td>
+                </tr>
+                <tr>
+                  <td>if / else</td>
+                  <td><code>if (x &gt; 0) { ... } else { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>switch</td>
+                  <td><code>switch (v) { case 1: ...; break; default: ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Ternaire</td>
+                  <td><code>const r = cond ? vrai : faux;</code></td>
+                </tr>
+                <tr>
+                  <td>Param. défaut</td>
+                  <td><code>function f(a, b = 10) { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Rest</td>
+                  <td><code>function f(...args) { ... }</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Poursuivre</h3>
+            <ul>
+              <li>Tableaux : <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code></li>
+              <li>Objets, boucles <code>for</code> / <code>for...of</code></li>
+              <li>Erreurs : <code>try</code> / <code>catch</code> / <code>throw</code></li>
+              <li>Asynchrone : Promises, <code>async</code> / <code>await</code></li>
+              <li>DOM : sélecteurs, événements</li>
+            </ul>
+            <div class="success">
+              Référence : <a href="https://developer.mozilla.org/fr/">MDN Web Docs</a> — ainsi que CodePen, JSFiddle ou freeCodeCamp pour pratiquer.
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <div class="footer">Cours JavaScript — Fonctions &amp; conditions • Page unique</div>
+    </div>
+  </body>
+</html>
