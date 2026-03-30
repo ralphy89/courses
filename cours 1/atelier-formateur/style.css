@@ -31,8 +31,15 @@ html[data-theme="light"] {
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
   font-family: var(--font);
   font-size: 1rem;
   line-height: 1.55;
@@ -343,4 +350,33 @@ h2.exo-title {
 #stock-list li strong {
   color: var(--accent);
   font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .page {
+    max-width: 100%;
+    padding: 1.25rem max(1rem, env(safe-area-inset-left, 0px)) 2rem max(1rem, env(safe-area-inset-right, 0px));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  h1 {
+    font-size: 1.35rem;
+  }
+
+  h2.exo-title {
+    font-size: 1.1rem;
+  }
+
+  .panel {
+    padding: 1rem 1rem;
+  }
+
+  .result {
+    font-size: 0.78rem;
+  }
+}
+
+#stock-list li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
