@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 2 — QCM</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <nav class="exo-nav" aria-label="Navigation">
+        <a href="index.html">← Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="connexion.html">← Exercice 1</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 2 — QCM</h1>
+          <p class="subtitle">
+            Vous rédigez les <strong>questions dans ce fichier HTML</strong> ; le calcul du score se fait dans
+            <code>qcm.js</code> (<code>getElementById</code>, <code>getElementsByName</code>).
+          </p>
+        </div>
+      </header>
+
+      <p class="exo-lead">
+        À faire : <strong>qcm.html</strong> (au moins 4 questions) + <strong>qcm.js</strong> (score). Pas de
+        <code>querySelector</code>.
+      </p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes-qcm">
+          <h2 id="consignes-qcm">Comment ajouter vos questions</h2>
+          <ol>
+            <li>
+              Dans la zone « Questionnaire » ci-contre, sous le titre, insérez <strong>au moins 4 blocs</strong>
+              <code>&lt;fieldset class="qcm-fieldset"&gt;</code>.
+            </li>
+            <li>
+              Chaque question : un <code>&lt;legend&gt;</code> (l’intitulé), puis 3 <code>&lt;label&gt;</code> contenant chacun un
+              <code>&lt;input type="radio"&gt;</code>.
+            </li>
+            <li>
+              Pour la question 1, tous les radios ont <code>name="q1"</code> ; pour la question 2,
+              <code>name="q2"</code>, etc. jusqu’à <code>q4</code>.
+            </li>
+            <li>
+              Donnez à chaque radio une <code>value</code> parmi <strong>a</strong>, <strong>b</strong> ou <strong>c</strong> (une valeur par
+              proposition).
+            </li>
+            <li>
+              Ne déplacez pas le bouton <code>#btn-resultat</code> ni la <code>#resultat</code> : le script en a besoin.
+            </li>
+            <li>
+              Dans <code>qcm.js</code>, remplissez le tableau <code>bonnesReponses</code> : une entrée par question, dans l’ordre
+              <code>q1</code>, <code>q2</code>… avec la <code>value</code> de la <strong>bonne</strong> réponse (ex.
+              <code>["a", "c", "b", "a"]</code> selon vos choix).
+            </li>
+          </ol>
+
+          <h3 class="qcm-exemple-titre">Exemple d’une question (à copier et modifier)</h3>
+          <pre><code>&lt;fieldset class="qcm-fieldset"&gt;
+  &lt;legend&gt;1. Votre question ici ?&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="radio" name="q1" value="a" /&gt; Première réponse&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="q1" value="b" /&gt; Deuxième réponse&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="q1" value="c" /&gt; Troisième réponse&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+          <p class="exo-lead" style="margin-top: 1rem">
+            Pour la question 2, remplacez <code>q1</code> par <code>q2</code> dans <code>name</code>, etc.
+          </p>
+        </section>
+
+        <section class="panel" aria-labelledby="titre-qcm">
+          <h2 id="titre-qcm">Questionnaire</h2>
+
+          <p id="qcm-placeholder" class="qcm-placeholder">
+            Supprimez ce paragraphe une fois vos questions ajoutées. Ajoutez vos <code>&lt;fieldset&gt;</code> ici (entre ce texte et
+            le bouton).
+          </p>
+
+          <!-- Collez vos fieldsets ici (questions 1 à 4+, name="q1" … "q4") -->
+
+          <button type="button" class="btn-qcm" id="btn-resultat">Voir mon score</button>
+          <div id="resultat" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <footer>
+        <p><code>qcm.html</code> (questions) + <code>qcm.js</code> (correction) + <code>style.css</code></p>
+      </footer>
+    </div>
+
+    <script src="qcm.js"></script>
+  </body>
+</html>

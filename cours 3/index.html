@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript — Formulaires, connexion &amp; QCM</title>
+    <link rel="stylesheet" href="assets/course.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="hero">
+        <span class="eyebrow">Cours JavaScript • 3 • Interactivité côté navigateur</span>
+        <h1>Formulaires, page de connexion &amp; QCM</h1>
+        <p>
+          Rappels sur le <strong>DOM</strong> et les <strong>événements</strong>, puis deux exercices concrets : une
+          <strong>page de connexion</strong> simple (validation côté client) et un <strong>questionnaire à choix multiples</strong>
+          (QCM) à construire pas à pas.
+        </p>
+
+        <div class="hero-grid">
+          <div class="card pad">
+            <h3>Thèmes</h3>
+            <div class="tag-row">
+              <span class="tag">getElementById</span>
+              <span class="tag">getElementsByName</span>
+              <span class="tag">addEventListener</span>
+              <span class="tag">submit</span>
+              <span class="tag">preventDefault</span>
+              <span class="tag">input / radio</span>
+              <span class="tag">classList</span>
+            </div>
+            <div class="info mt-18">
+              Prérequis : variables, <code>if</code>/<code>else</code>, tableaux et objets (cours 1), fonctions (cours 2).
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h3>Exercices</h3>
+            <div class="quick-list">
+              <div class="quick-item">
+                <strong>Exercice 1</strong>
+                Page de connexion : champs identifiant / mot de passe, messages utilisateur.
+              </div>
+              <div class="quick-item">
+                <strong>Exercice 2</strong>
+                QCM : questions, choix, score et correction affichés dans la page.
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="section-grid">
+        <aside class="card sidebar">
+          <h3>Sommaire</h3>
+          <nav class="nav-links">
+            <a href="#intro">Introduction</a>
+            <a href="#rappels">Rappels DOM &amp; formulaires</a>
+            <a href="#exo1">Exercice 1 — Connexion</a>
+            <a href="#exo2">Exercice 2 — QCM</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#recap">Récap &amp; suite</a>
+            <a href="templates-eleves/index.html">Fichiers élève (HTML fourni)</a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section id="intro" class="card">
+            <h2>Introduction</h2>
+            <p>
+              Une page web « dynamique » réagit aux clics, à la saisie au clavier et à l’envoi de formulaires grâce au
+              JavaScript dans le navigateur. Vous ciblez des éléments avec
+              <code>document.getElementById("…")</code> (grâce à l’attribut <code>id</code> du HTML), et pour les groupes de boutons
+              radio <code>document.getElementsByName("…")</code> (attribut <code>name</code>), puis vous attachez des
+              <strong>écouteurs d’événements</strong> (<code>addEventListener</code>).
+            </p>
+            <div class="warning">
+              Ici la connexion et le QCM sont <strong>simulés dans le navigateur</strong> uniquement : les vrais sites
+              vérifient les identifiants sur un <strong>serveur</strong>. Ne mettez jamais de vrais mots de passe en clair dans
+              le code public.
+            </div>
+            <div class="success">
+              <strong>Travail en classe (template élève)</strong> — Dans le dossier
+              <code>cours 3/templates-eleves/</code>, chaque exercice est une page HTML prête (mise en forme incluse) : l’élève
+              n’a qu’à écrire <code>connexion.js</code> ; pour le QCM, il ajoute les questions dans <code>qcm.html</code> et le
+              script dans <code>qcm.js</code>.
+              <a href="templates-eleves/index.html">Ouvrir l’accueil des fichiers élève</a>.
+            </div>
+          </section>
+
+          <section id="rappels" class="card">
+            <h2>Rappels — DOM &amp; formulaires</h2>
+
+            <h3>Sélectionner un élément par son <code>id</code></h3>
+            <pre><code>const form = document.getElementById("login-form");
+const message = document.getElementById("message");
+const champLogin = document.getElementById("login");</code></pre>
+
+            <h3>Écouter la soumission d’un formulaire</h3>
+            <pre><code>form.addEventListener("submit", function (event) {
+  event.preventDefault(); // évite le rechargement de la page
+  const login = document.getElementById("login").value.trim();
+  // …
+});</code></pre>
+
+            <h3>Lire le bouton radio coché (même <code>name</code>)</h3>
+            <pre><code>// Les radios d’une question partagent le même name="q1"
+function radioCoche(nom) {
+  const liste = document.getElementsByName(nom);
+  for (let i = 0; i &lt; liste.length; i++) {
+    if (liste[i].checked) return liste[i];
+  }
+  return null;
+}
+
+const choisi = radioCoche("q1");
+if (choisi) {
+  console.log(choisi.value);
+}</code></pre>
+
+            <div class="info">
+              Utilisez <code>.trim()</code> sur les champs texte pour ignorer espaces en trop. Préférez
+              <code>textContent</code> pour afficher du texte utilisateur (évite l’injection de HTML accidentelle).
+            </div>
+          </section>
+
+          <section id="exo1" class="card">
+            <h2>Exercice 1 — Page de connexion (simple)</h2>
+            <p>
+              En autonomie : créez <code>connexion.html</code> + <code>connexion.js</code>. En classe avec le
+              <strong>template élève</strong>, ouvrez <code>templates-eleves/connexion.html</code> : la page est déjà faite, vous
+              complétez seulement <code>connexion.js</code>.
+            </p>
+
+            <h3>Contenu minimal du formulaire</h3>
+            <ul>
+              <li>Le <code>&lt;form&gt;</code> doit avoir un <code>id</code> (ex. <code>login-form</code>) pour <code>getElementById</code>.</li>
+              <li>Un champ <strong>identifiant</strong> (type <code>text</code>, <code>id</code> ex. <code>login</code>).</li>
+              <li>Un champ <strong>mot de passe</strong> (type <code>password</code>, <code>id</code> ex. <code>password</code>).</li>
+              <li>Un bouton « Se connecter » (<code>type="submit"</code>).</li>
+              <li>La zone de message avec un <code>id</code> (ex. <code>message</code>).</li>
+            </ul>
+
+            <h3>Comportement attendu (JavaScript)</h3>
+            <ol>
+              <li>À la soumission : <code>preventDefault</code> sur l’événement.</li>
+              <li>
+                Si identifiant ou mot de passe vide → afficher un message d’erreur dans un paragraphe ou une
+                <code>div</code> (ex. <code>#message</code>), style visible (couleur rouge ou classe CSS).
+              </li>
+              <li>
+                Sinon, comparer avec des <strong>identifiants factices</strong> en dur dans le script, par exemple
+                <code>login === "demo"</code> et <code>motDePasse === "code123"</code> (à adapter).
+              </li>
+              <li>Si correct → message de succès (ex. « Bienvenue ! ») ; sinon → « Identifiants incorrects ».</li>
+              <li>Option : vider les champs après succès, ou afficher un lien factice « Mot de passe oublié ».</li>
+            </ol>
+
+            <div class="success">
+              Astuce : gardez le HTML sémantique (<code>&lt;form&gt;</code>, <code>&lt;label for="…"&gt;</code> relié aux
+              <code>id</code>) pour l’accessibilité et le clavier.
+            </div>
+          </section>
+
+          <section id="exo2" class="card">
+            <h2>Exercice 2 — QCM à réaliser</h2>
+            <p>
+              En autonomie : créez <code>qcm.html</code> + <code>qcm.js</code> (4 questions, 3 choix, radios). Avec le
+              <strong>template élève</strong>, <code>templates-eleves/qcm.html</code> fournit la structure et le bouton de score :
+              c’est à l’élève d’<strong>écrire les questions</strong> en HTML, puis d’aligner le tableau
+              <code>bonnesReponses</code> dans <code>qcm.js</code>.
+            </p>
+
+            <h3>Méthode</h3>
+            <p>
+              Écrivez le <strong>HTML des 4 questions à la main</strong> (titres, textes, 3 radios par question avec le même
+              <code>name</code> par question : <code>q1</code>, <code>q2</code>… et des <code>value</code> distinctes, ex.
+              <code>a</code>, <code>b</code>, <code>c</code>). Le bouton « Voir mes résultats » et la zone du score ont chacun un
+              <code>id</code> (ex. <code>btn-resultat</code>, <code>resultat</code>).
+            </p>
+            <p>
+              En JavaScript, un tableau <strong>bonnesReponses</strong> : une entrée par question, dans l’ordre, avec la
+              <code>value</code> de la bonne réponse pour <strong>vos</strong> questions (ex. <code>["a", "c", "b", "a"]</code>).
+              Au clic : parcourez chaque groupe avec <code>getElementsByName("q1")</code>, etc., testez
+              <code>.checked</code> et comparez la <code>value</code> au tableau.
+            </p>
+
+            <h3>Logique de correction</h3>
+            <ol>
+              <li>Compter combien de bonnes réponses (score sur 4).</li>
+              <li>Afficher le score dans la page (ex. « Vous avez 3 / 4 »).</li>
+              <li>
+                Afficher un court détail : pour chaque question, « correct » ou « faux » (sans forcément révéler la bonne
+                réponse, ou avec — au choix du formateur).
+              </li>
+              <li>
+                Si aucune réponse sélectionnée pour une question, gérer le cas (message ou compter comme faux).
+              </li>
+            </ol>
+
+            <div class="info">
+              Thèmes possibles pour les questions : balises HTML, rôle du CSS, différences
+              <code>let</code>/<code>const</code>, rôle de <code>preventDefault</code>, etc.
+            </div>
+          </section>
+
+          <section id="solutions" class="card">
+            <h2>Solutions — extraits de référence</h2>
+            <p>À adapter à vos fichiers et à vos identifiants / questions.</p>
+
+            <h3>Exercice 1 — cœur du script (connexion factice)</h3>
+            <pre><code>const BON_LOGIN = "demo";
+const BON_MOT_DE_PASSE = "code123";
+
+const form = document.getElementById("login-form");
+const zoneMessage = document.getElementById("message");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  zoneMessage.textContent = "";
+
+  const login = document.getElementById("login").value.trim();
+  const mdp = document.getElementById("password").value;
+
+  if (!login || !mdp) {
+    zoneMessage.textContent = "Veuillez remplir tous les champs.";
+    return;
+  }
+
+  if (login === BON_LOGIN &amp;&amp; mdp === BON_MOT_DE_PASSE) {
+    zoneMessage.textContent = "Connexion réussie — bienvenue !";
+  } else {
+    zoneMessage.textContent = "Identifiant ou mot de passe incorrect.";
+  }
+});</code></pre>
+
+            <h3>Exercice 2 — correction QCM</h3>
+            <p>
+              Adaptez <code>bonnesReponses</code> au contenu réel des questions. HTML : <code>name="q1"</code> …
+              <code>name="q4"</code>, <code>value</code> parmi <code>a</code>, <code>b</code>, <code>c</code>.
+            </p>
+            <pre><code>const bonnesReponses = ["a", "b", "a", "c"]; // à adapter à VOS bonnes réponses
+
+function radioCoche(nom) {
+  const liste = document.getElementsByName(nom);
+  for (let i = 0; i &lt; liste.length; i++) {
+    if (liste[i].checked) return liste[i];
+  }
+  return null;
+}
+
+function scoreQcm() {
+  let score = 0;
+  for (let i = 0; i &lt; bonnesReponses.length; i++) {
+    const nom = "q" + (i + 1);
+    const choix = radioCoche(nom);
+    if (choix &amp;&amp; choix.value === bonnesReponses[i]) {
+      score++;
+    }
+  }
+  return score;
+}
+
+document.getElementById("btn-resultat").addEventListener("click", function () {
+  const s = scoreQcm();
+  document.getElementById("resultat").textContent =
+    "Score : " + s + " / " + bonnesReponses.length;
+});</code></pre>
+          </section>
+
+          <section id="recap" class="card">
+            <h2>Récapitulatif &amp; suite</h2>
+            <ul>
+              <li><code>form.addEventListener("submit", …)</code> + <code>event.preventDefault()</code></li>
+              <li>Lecture des champs : <code>getElementById("…").value</code>, <code>getElementsByName("…")</code> + boucle sur <code>.checked</code></li>
+              <li>Feedback utilisateur : <code>textContent</code>, classes CSS</li>
+              <li>QCM : HTML des questions + tableau <code>bonnesReponses</code> + <code>name</code> sur les radios</li>
+            </ul>
+            <div class="success">
+              Pour aller plus loin : envoi réel des données avec <code>fetch</code> vers une API, validation HTML5
+              (<code>required</code>, <code>pattern</code>), <a href="https://developer.mozilla.org/fr/docs/Web/API/Document_Object_Model">MDN — DOM</a>.
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

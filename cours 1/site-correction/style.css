@@ -344,6 +344,26 @@ h2.exo-title {
   font-size: 0.95rem;
 }
 
+.ref-ressources {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--accent-dim);
+}
+
+.ref-ressources strong {
+  color: var(--text);
+}
+
+.ref-ressources a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .stock-erreur {
   margin: 0.75rem 0 0;
   min-height: 1.2em;

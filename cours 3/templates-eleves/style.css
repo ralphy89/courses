@@ -374,6 +374,11 @@ h2.exo-title {
   font-weight: 600;
 }
 
+.ref-ressources--index {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
 .stock-erreur {
   margin: 0.75rem 0 0;
   min-height: 1.2em;
@@ -502,6 +507,52 @@ html[data-theme="light"] .stock-erreur {
   letter-spacing: normal;
 }
 
+.footer-link-corrige {
+  margin-top: 0.75rem;
+}
+
+.exo-nav {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.exo-nav a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.exo-nav a:hover {
+  text-decoration: underline;
+}
+
+.exo-nav-sep {
+  margin: 0 0.35rem;
+  opacity: 0.6;
+}
+
+.index-exo-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.index-exo-list li {
+  margin-bottom: 1rem;
+}
+
+.index-exo-files {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.index-commun-note {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 @media (max-width: 480px) {
   .page {
     max-width: 100%;
@@ -524,5 +575,116 @@ html[data-theme="light"] .stock-erreur {
   .result {
     font-size: 0.78rem;
   }
+}
+
+/* Cours 3 — connexion & QCM */
+.page--narrow {
+  max-width: 28rem;
+}
+
+.connexion-card {
+  max-width: 22rem;
+  margin: 0 auto;
+}
+
+#message {
+  margin-top: 1rem;
+  min-height: 1.4em;
+  font-size: 0.92rem;
+}
+
+#message.msg-erreur {
+  color: #f87171;
+}
+
+html[data-theme="light"] #message.msg-erreur {
+  color: #dc2626;
+}
+
+#message.msg-succes {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.qcm-fieldset {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+html[data-theme="light"] .qcm-fieldset {
+  background: rgba(241, 245, 249, 0.8);
+}
+
+.qcm-fieldset legend {
+  font-weight: 700;
+  color: var(--text);
+  padding: 0 0.35rem;
+}
+
+.qcm-fieldset label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.qcm-fieldset input[type="radio"] {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+button[type="button"].btn-qcm {
+  margin-top: 1.35rem;
+  width: 100%;
+  max-width: 20rem;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button[type="button"].btn-qcm:hover {
+  filter: brightness(1.08);
+}
+
+#resultat {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 0.95rem;
+  min-height: 2.5rem;
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.qcm-placeholder {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.qcm-exemple-titre {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
 }
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 1 — Connexion</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--narrow">
+      <nav class="exo-nav" aria-label="Navigation">
+        <a href="index.html">← Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="qcm.html">Exercice 2 (QCM) →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 1 — Connexion</h1>
+          <p class="subtitle">
+            Interface prête : vous codez la logique dans <code>connexion.js</code> (identifiants factices, messages).
+          </p>
+        </div>
+      </header>
+
+      <p class="exo-lead">
+        Fichier à compléter : <code>connexion.js</code> — utilisez <code>document.getElementById</code> uniquement (pas de
+        <code>querySelector</code>).
+      </p>
+
+      <div class="layout">
+        <section class="panel instructions" aria-labelledby="consignes-cnx">
+          <h2 id="consignes-cnx">Rappel des consignes</h2>
+          <ol>
+            <li>À la soumission du formulaire : <code>preventDefault</code>.</li>
+            <li>Champs vides → message d’erreur dans <code>#message</code> (classe <code>msg-erreur</code>).</li>
+            <li>
+              Sinon, tester <code>login === "demo"</code> et mot de passe <code>=== "code123"</code> (ou changez ces valeurs
+              dans le script, en cohérence avec le cours).
+            </li>
+            <li>Succès → texte positif et classe <code>msg-succes</code> ; échec → message d’erreur.</li>
+          </ol>
+        </section>
+
+        <section class="panel connexion-card" aria-labelledby="titre-form">
+          <h2 id="titre-form">Se connecter</h2>
+          <form id="login-form" novalidate>
+            <label for="login">Identifiant</label>
+            <input type="text" id="login" name="login" autocomplete="username" />
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" />
+
+            <button type="submit">Se connecter</button>
+          </form>
+          <p id="message" aria-live="polite"></p>
+        </section>
+      </div>
+
+      <footer>
+        <p><code>connexion.html</code> + <code>connexion.js</code> + <code>style.css</code></p>
+      </footer>
+    </div>
+
+    <script src="connexion.js"></script>
+  </body>
+</html>
