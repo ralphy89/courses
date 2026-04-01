@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercice 2 — Liste (tableau) et objets</title>
+    <title>Exercice 2 — Stock d’appareils électroniques (cartes)</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="page">
+    <div class="page page--stock">
       <nav class="exo-nav" aria-label="Navigation entre exercices">
         <a href="index.html">← Accueil</a>
         <span class="exo-nav-sep">·</span>
@@ -16,10 +16,11 @@
 
       <header class="page-header">
         <div class="titles">
-          <h1>Exercice 2 — Liste (tableau) et objets</h1>
+          <h1>Exercice 2 — Stock d’appareils électroniques (cartes)</h1>
           <p class="subtitle">
-            Plusieurs appareils dans un <strong>tableau</strong> ; chaque entrée est un <strong>objet</strong>
-            <code>{ nom, marque, prix, type }</code>.
+            Smartphones, <strong>laptops</strong>, tablettes, consoles, audio… Chaque article est un <strong>objet</strong> avec
+            <strong>image</strong>, modèle, marque, type, prix et quantité. Le <strong>formulaire</strong> est à gauche ; les
+            <strong>cartes</strong> s’affichent à droite.
           </p>
         </div>
       </header>
@@ -28,45 +29,85 @@
         Script à compléter : <code>exo2.js</code>.
       </p>
 
-      <div class="layout">
-        <section class="panel instructions" aria-labelledby="consignes-2">
-          <h2 id="consignes-2">Consignes</h2>
-          <ol>
-            <li><code>let inventaire = []</code> dans <code>exo2.js</code>.</li>
-            <li>À la soumission : construire un objet, <code>inventaire.push(appareil)</code>, <code>reset()</code> du formulaire.</li>
-            <li>Fonction <code>afficherInventaire()</code> : vider <code>#stock-list</code>, boucle <code>for</code>, un <code>&lt;li&gt;</code> par article.</li>
-            <li>Afficher <code>inventaire.length</code> dans <code>#stock-count</code>.</li>
-          </ol>
-        </section>
+      <section class="panel instructions instructions--full" aria-labelledby="consignes-2">
+        <h2 id="consignes-2">Consignes</h2>
+        <ol>
+          <li><code>let inventaire = []</code> dans <code>exo2.js</code>.</li>
+          <li>
+            Objet à enregistrer (exemple) :
+            <code>{ imageUrl, modele, marque, categorie, prix, quantite }</code> — <code>categorie</code> reprend le
+            <strong>type</strong> choisi (téléphone, laptop, console…). <code>imageUrl</code> peut être vide.
+          </li>
+          <li>
+            À la soumission : <code>if</code> pour modèle, marque et type non vides ; prix et quantité valides (nombres ≥ 0). Sinon
+            message dans <code>#stock-erreur</code>.
+          </li>
+          <li>Sinon : <code>push</code>, vider l’erreur, <code>reset()</code> du formulaire, <code>afficherCartes()</code>.</li>
+          <li>
+            <code>afficherCartes()</code> : vider <code>#stock-cartes</code>, boucle <code>for</code>, pour chaque article un
+            <code>&lt;article class="stock-card"&gt;</code> avec une <strong>image</strong> (<code>&lt;img&gt;</code> si URL non vide, sinon la zone
+            <code>.stock-card-photo-placeholder</code>) et toutes les infos (marque, type, prix, stock).
+          </li>
+          <li>Mettre à jour <code>#stock-count</code> avec <code>inventaire.length</code>.</li>
+        </ol>
+      </section>
 
-        <section class="panel" aria-labelledby="stock-form-title">
-          <h2 id="stock-form-title">Stock (tableau d’objets)</h2>
+      <div class="stock-workspace">
+        <section class="panel stock-form-column" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Ajouter un appareil</h2>
           <form id="stock-form" novalidate>
-            <label for="stock-device-name">Nom de l’appareil</label>
-            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+            <label for="phone-image">Image (lien URL, facultatif)</label>
+            <input
+              type="url"
+              id="phone-image"
+              name="phoneImage"
+              placeholder="https://… (photo de l’appareil)"
+              autocomplete="off"
+            />
 
-            <label for="stock-brand">Marque</label>
-            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+            <label for="phone-modele">Modèle</label>
+            <input
+              type="text"
+              id="phone-modele"
+              name="phoneModele"
+              placeholder="ex. : Pixel 8, MacBook Air, Switch OLED…"
+              autocomplete="off"
+              required
+            />
 
-            <label for="stock-price">Prix (€)</label>
-            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+            <label for="phone-marque">Marque</label>
+            <input type="text" id="phone-marque" name="phoneMarque" placeholder="ex. : Google, Apple, Sony…" required />
 
-            <label for="stock-category">Type</label>
-            <select id="stock-category" name="stockCategory" required>
+            <label for="phone-categorie">Type d’appareil</label>
+            <select id="phone-categorie" name="phoneCategorie" required>
               <option value="">— Choisir —</option>
-              <option value="smartphone">Smartphone</option>
-              <option value="laptop">Ordinateur portable</option>
-              <option value="tablet">Tablette</option>
-              <option value="console">Console de jeu</option>
-              <option value="audio">Audio / casque</option>
-              <option value="other">Autre</option>
+              <option value="Smartphone">Smartphone</option>
+              <option value="Téléphone classique">Téléphone classique</option>
+              <option value="Tablette">Tablette</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Ordinateur fixe">Ordinateur fixe</option>
+              <option value="Console de jeu">Console de jeu</option>
+              <option value="Audio / casque">Audio / casque</option>
+              <option value="Montre connectée">Montre connectée</option>
+              <option value="Autre appareil">Autre appareil</option>
             </select>
+
+            <label for="phone-prix">Prix unitaire (€)</label>
+            <input type="number" id="phone-prix" name="phonePrix" min="0" step="0.01" placeholder="699" required />
+
+            <label for="phone-quantite">Quantité en stock</label>
+            <input type="number" id="phone-quantite" name="phoneQuantite" min="0" value="1" step="1" required />
 
             <button type="submit">Ajouter au stock</button>
           </form>
 
-          <p id="stock-count" aria-live="polite"></p>
-          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+          <p id="stock-erreur" class="stock-erreur" aria-live="polite"></p>
+          <p id="stock-count" class="stock-count-form" aria-live="polite"></p>
+        </section>
+
+        <section class="panel stock-cartes-column" aria-labelledby="stock-cartes-title">
+          <h2 id="stock-cartes-title">Inventaire (cartes)</h2>
+          <div id="stock-cartes" class="stock-cartes" aria-label="Appareils en stock"></div>
         </section>
       </div>
 
@@ -75,7 +116,6 @@
           Ce dossier : <code>exo2.html</code>, <code>exo2.js</code>, <code>style.css</code> (commun) +
           <a href="exo1.html">exo1</a>.
         </p>
-     
       </footer>
     </div>
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="page">
+    <div class="page page--stock">
       <p class="page-banner" role="status">
         <strong>Version corrigée</strong> — Page de référence pour les apprenants. Les blocs verts reprennent le code
         commenté ; le script <code>index.js</code> sur cette page est entièrement fonctionnel.
@@ -17,7 +17,8 @@
         <div class="titles">
           <h1>Exercices JavaScript — Appareils électroniques</h1>
           <p class="subtitle">
-            Même énoncé que le dossier envoyé aux élèves : ici tout fonctionne et le code source est visible.
+            Même logique que <code>templates-eleves</code> : ex. 2 avec <strong>image</strong>, formulaire à gauche et
+            <strong>cartes</strong> à droite.
           </p>
         </div>
         <button type="button" class="btn-theme" id="theme-toggle" aria-pressed="false" aria-label="Changer le thème">
@@ -95,82 +96,84 @@
       </div>
 
       <div class="section-divider" id="exo2">
-        <h2 class="exo-title">Exercice 2 — Liste et objets</h2>
-        <p class="exo-lead">Tableau <code>inventaire</code>, objets <code>{ nom, marque, prix, type }</code>, boucle d’affichage.</p>
+        <h2 class="exo-title">Exercice 2 — Inventaire en cartes</h2>
+        <p class="exo-lead">
+          Objets <code>{ imageUrl, modele, marque, categorie, prix, quantite }</code> — liste de types élargie (laptop, console,
+          audio…), comme <code>templates-eleves/exo2.html</code>.
+        </p>
       </div>
 
-      <div class="layout">
-        <section class="panel instructions" aria-labelledby="consignes-2">
-          <h2 id="consignes-2">Rappel</h2>
-          <ol>
-            <li><code>push</code>, <code>reset()</code>, <code>innerHTML = ""</code></li>
-            <li>Boucle <code>for</code> + <code>createElement("li")</code></li>
-          </ol>
-        </section>
+      <section class="panel instructions instructions--full" aria-labelledby="consignes-2">
+        <h2 id="consignes-2">Rappel</h2>
+        <ol>
+          <li>Validation <code>if</code>, <code>#stock-erreur</code></li>
+          <li><code>push</code>, <code>reset()</code>, <code>afficherCartes()</code></li>
+          <li>Boucle <code>for</code> + <code>createElement</code> (carte, image ou placeholder)</li>
+        </ol>
+      </section>
 
-        <section class="panel" aria-labelledby="stock-form-title">
-          <h2 id="stock-form-title">Stock (démo)</h2>
+      <div class="stock-workspace">
+        <section class="panel stock-form-column" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Ajouter un appareil (démo)</h2>
           <form id="stock-form" novalidate>
-            <label for="stock-device-name">Nom de l’appareil</label>
-            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+            <label for="phone-image">Image (lien URL, facultatif)</label>
+            <input
+              type="url"
+              id="phone-image"
+              name="phoneImage"
+              placeholder="https://… (photo de l’appareil)"
+              autocomplete="off"
+            />
 
-            <label for="stock-brand">Marque</label>
-            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+            <label for="phone-modele">Modèle</label>
+            <input
+              type="text"
+              id="phone-modele"
+              name="phoneModele"
+              placeholder="ex. : Pixel 8, MacBook Air, Switch OLED…"
+              autocomplete="off"
+              required
+            />
 
-            <label for="stock-price">Prix (€)</label>
-            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+            <label for="phone-marque">Marque</label>
+            <input type="text" id="phone-marque" name="phoneMarque" placeholder="ex. : Google, Apple, Sony…" required />
 
-            <label for="stock-category">Type</label>
-            <select id="stock-category" name="stockCategory" required>
+            <label for="phone-categorie">Type d’appareil</label>
+            <select id="phone-categorie" name="phoneCategorie" required>
               <option value="">— Choisir —</option>
-              <option value="smartphone">Smartphone</option>
-              <option value="laptop">Ordinateur portable</option>
-              <option value="tablet">Tablette</option>
-              <option value="console">Console de jeu</option>
-              <option value="audio">Audio / casque</option>
-              <option value="other">Autre</option>
+              <option value="Smartphone">Smartphone</option>
+              <option value="Téléphone classique">Téléphone classique</option>
+              <option value="Tablette">Tablette</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Ordinateur fixe">Ordinateur fixe</option>
+              <option value="Console de jeu">Console de jeu</option>
+              <option value="Audio / casque">Audio / casque</option>
+              <option value="Montre connectée">Montre connectée</option>
+              <option value="Autre appareil">Autre appareil</option>
             </select>
+
+            <label for="phone-prix">Prix unitaire (€)</label>
+            <input type="number" id="phone-prix" name="phonePrix" min="0" step="0.01" placeholder="699" required />
+
+            <label for="phone-quantite">Quantité en stock</label>
+            <input type="number" id="phone-quantite" name="phoneQuantite" min="0" value="1" step="1" required />
 
             <button type="submit">Ajouter au stock</button>
           </form>
 
-          <p id="stock-count" aria-live="polite"></p>
-          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+          <p id="stock-erreur" class="stock-erreur" aria-live="polite"></p>
+          <p id="stock-count" class="stock-count-form" aria-live="polite"></p>
 
           <div class="correction correction--deploy">
-            <strong>Code de référence — exercice 2</strong>
-            <pre><code>let inventaire = [];
-
-function afficherInventaire() {
-  const liste = document.getElementById("stock-list");
-  const compteur = document.getElementById("stock-count");
-  liste.innerHTML = "";
-  compteur.textContent = inventaire.length + " appareil(s) en stock";
-
-  for (let i = 0; i &lt; inventaire.length; i++) {
-    const a = inventaire[i];
-    const li = document.createElement("li");
-    li.textContent =
-      a.nom + " — " + a.marque + " — " + a.prix + " € — " + a.type;
-    liste.appendChild(li);
-  }
-}
-
-stockForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const appareil = {
-    nom: document.getElementById("stock-device-name").value.trim(),
-    marque: document.getElementById("stock-brand").value.trim(),
-    prix: Number(document.getElementById("stock-price").value),
-    type: document.getElementById("stock-category").value,
-  };
-  inventaire.push(appareil);
-  stockForm.reset();
-  afficherInventaire();
-});
-
-afficherInventaire();</code></pre>
+            <strong>Code de référence — exercice 2 (voir <code>index.js</code>)</strong>
+            <pre><code>/* inventaire.push({ imageUrl, modele, marque, categorie, prix, quantite })
+   afficherCartes() : #stock-cartes, .stock-card, img ou .stock-card-photo-placeholder */</code></pre>
           </div>
+        </section>
+
+        <section class="panel stock-cartes-column" aria-labelledby="stock-cartes-title">
+          <h2 id="stock-cartes-title">Inventaire (cartes)</h2>
+          <div id="stock-cartes" class="stock-cartes" aria-label="Appareils en stock"></div>
         </section>
       </div>
 

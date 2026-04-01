@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="page">
+    <div class="page page--stock">
       <header class="page-header">
         <div class="titles">
           <h1>Exercices JavaScript — Appareils électroniques</h1>
           <p class="subtitle">
             Contexte : <strong>appareils électroniques</strong>. Ex. 1 : variables et formulaire. Ex. 2 : plusieurs
-            appareils dans un <strong>tableau</strong>, chacun décrit par un <strong>objet</strong>.
+            appareils dans un <strong>tableau</strong> ; ex. 2 : objets avec <strong>image</strong>, fiches en <strong>cartes</strong>.
           </p>
         </div>
         <button type="button" class="btn-theme" id="theme-toggle" aria-pressed="false" aria-label="Changer le thème">
@@ -116,102 +116,135 @@
       </div>
 
       <div class="section-divider" id="exo2">
-        <h2 class="exo-title">Exercice 2 — Liste (tableau) et objets</h2>
+        <h2 class="exo-title">Exercice 2 — Inventaire en cartes (image + infos)</h2>
         <p class="exo-lead">
-          Regrouper plusieurs appareils dans un <strong>tableau</strong> ; chaque appareil est un <strong>objet</strong>
-          <code>{ nom, marque, prix, type }</code>. Ajouter au stock puis réafficher la liste.
+          Tableau d’objets <code>{ imageUrl, modele, marque, categorie, prix, quantite }</code> — types variés (téléphone, laptop,
+          console…). Formulaire à <strong>gauche</strong>, cartes à <strong>droite</strong> (comme
+          <code>templates-eleves/exo2.html</code>).
         </p>
       </div>
 
-      <div class="layout">
-        <section class="panel instructions" aria-labelledby="consignes-2">
-          <h2 id="consignes-2">Consignes (formateur / élève)</h2>
-          <ol>
-            <li>
-              Dans <code>index.js</code>, section <strong>Exercice 2</strong>, créez un tableau vide
-              <code>let inventaire = []</code> (ou avec quelques objets de démo).
-            </li>
-            <li>
-              Sur envoi du formulaire « Ajouter au stock », construisez un <strong>objet littéral</strong> avec les
-              propriétés <code>nom</code>, <code>marque</code>, <code>prix</code> (nombre), <code>type</code> (chaîne).
-            </li>
-            <li>Ajoutez cet objet au tableau avec <code>.push(...)</code>.</li>
-            <li>
-              Écrivez une fonction <code>afficherInventaire()</code> qui vide la liste HTML puis parcourt le tableau
-              (boucle <code>for</code>) pour créer un <code>&lt;li&gt;</code> par appareil (texte lisible ou
-              <code>textContent</code>).
-            </li>
-            <li>Rappelez <code>afficherInventaire()</code> après chaque ajout.</li>
-            <li>Option : affichez <code>inventaire.length</code> quelque part (nombre d’articles en stock).</li>
-          </ol>
-        </section>
+      <section class="panel instructions instructions--full" aria-labelledby="consignes-2">
+        <h2 id="consignes-2">Consignes (formateur / élève)</h2>
+        <ol>
+          <li>
+            Dans <code>index.js</code>, section <strong>Exercice 2</strong> : <code>let inventaire = []</code>.
+          </li>
+          <li>
+            À la soumission : lire les champs <code>#phone-image</code> (URL facultative), <code>#phone-modele</code>,
+            <code>#phone-marque</code>, <code>#phone-categorie</code>, <code>#phone-prix</code>, <code>#phone-quantite</code> ;
+            valider avec <code>if</code> (messages dans <code>#stock-erreur</code>).
+          </li>
+          <li><code>inventaire.push({ ... })</code>, <code>reset()</code>, puis <code>afficherCartes()</code>.</li>
+          <li>
+            <code>afficherCartes()</code> : vider <code>#stock-cartes</code>, boucle <code>for</code>, chaque article =
+            <code>&lt;article class="stock-card"&gt;</code> avec <code>.stock-card-media</code> (<code>&lt;img&gt;</code> ou
+            <code>.stock-card-photo-placeholder</code>) et <code>.stock-card-body</code> (modèle, marque, type, prix, stock).
+          </li>
+          <li>Afficher <code>inventaire.length</code> dans <code>#stock-count</code>.</li>
+        </ol>
+      </section>
 
-        <section class="panel" aria-labelledby="stock-form-title">
-          <h2 id="stock-form-title">Stock (tableau d’objets)</h2>
+      <div class="stock-workspace">
+        <section class="panel stock-form-column" aria-labelledby="stock-form-title">
+          <h2 id="stock-form-title">Ajouter un appareil</h2>
           <form id="stock-form" novalidate>
-            <label for="stock-device-name">Nom de l’appareil</label>
-            <input type="text" id="stock-device-name" name="stockDeviceName" placeholder="ex. : MacBook Air" required />
+            <label for="phone-image">Image (lien URL, facultatif)</label>
+            <input
+              type="url"
+              id="phone-image"
+              name="phoneImage"
+              placeholder="https://… (photo de l’appareil)"
+              autocomplete="off"
+            />
 
-            <label for="stock-brand">Marque</label>
-            <input type="text" id="stock-brand" name="stockBrand" placeholder="ex. : Apple" required />
+            <label for="phone-modele">Modèle</label>
+            <input
+              type="text"
+              id="phone-modele"
+              name="phoneModele"
+              placeholder="ex. : Pixel 8, MacBook Air, Switch OLED…"
+              autocomplete="off"
+              required
+            />
 
-            <label for="stock-price">Prix (€)</label>
-            <input type="number" id="stock-price" name="stockPrice" min="0" step="0.01" placeholder="1199" required />
+            <label for="phone-marque">Marque</label>
+            <input type="text" id="phone-marque" name="phoneMarque" placeholder="ex. : Google, Apple, Sony…" required />
 
-            <label for="stock-category">Type</label>
-            <select id="stock-category" name="stockCategory" required>
+            <label for="phone-categorie">Type d’appareil</label>
+            <select id="phone-categorie" name="phoneCategorie" required>
               <option value="">— Choisir —</option>
-              <option value="smartphone">Smartphone</option>
-              <option value="laptop">Ordinateur portable</option>
-              <option value="tablet">Tablette</option>
-              <option value="console">Console de jeu</option>
-              <option value="audio">Audio / casque</option>
-              <option value="other">Autre</option>
+              <option value="Smartphone">Smartphone</option>
+              <option value="Téléphone classique">Téléphone classique</option>
+              <option value="Tablette">Tablette</option>
+              <option value="Ordinateur portable">Ordinateur portable</option>
+              <option value="Ordinateur fixe">Ordinateur fixe</option>
+              <option value="Console de jeu">Console de jeu</option>
+              <option value="Audio / casque">Audio / casque</option>
+              <option value="Montre connectée">Montre connectée</option>
+              <option value="Autre appareil">Autre appareil</option>
             </select>
+
+            <label for="phone-prix">Prix unitaire (€)</label>
+            <input type="number" id="phone-prix" name="phonePrix" min="0" step="0.01" placeholder="699" required />
+
+            <label for="phone-quantite">Quantité en stock</label>
+            <input type="number" id="phone-quantite" name="phoneQuantite" min="0" value="1" step="1" required />
 
             <button type="submit">Ajouter au stock</button>
           </form>
 
-          <p id="stock-count" aria-live="polite"></p>
-          <ul id="stock-list" aria-label="Inventaire des appareils"></ul>
+          <p id="stock-erreur" class="stock-erreur" aria-live="polite"></p>
+          <p id="stock-count" class="stock-count-form" aria-live="polite"></p>
 
           <div class="toggle-wrap">
             <button type="button" class="ghost" id="toggle-correction-2" aria-expanded="false">
-              Afficher une correction possible (liste + objets)
+              Afficher une correction possible (cartes + image)
             </button>
             <div class="correction" id="correction-block-2">
-              <strong>Exemple — tableau, objet, push, boucle</strong>
-              <pre><code>let inventaire = [];
-
-function afficherInventaire() {
-  const liste = document.getElementById("stock-list");
+              <strong>Exemple — push, cartes, image ou placeholder</strong>
+              <pre><code>function afficherCartes() {
+  const zone = document.getElementById("stock-cartes");
   const compteur = document.getElementById("stock-count");
-  liste.innerHTML = "";
-  compteur.textContent = inventaire.length + " appareil(s) en stock";
+  zone.innerHTML = "";
+  compteur.textContent = inventaire.length + " référence(s) en inventaire";
 
   for (let i = 0; i &lt; inventaire.length; i++) {
     const a = inventaire[i];
-    const li = document.createElement("li");
-    li.textContent =
-      a.nom + " — " + a.marque + " — " + a.prix + " € — " + a.type;
-    liste.appendChild(li);
-  }
-}
+    const card = document.createElement("article");
+    card.className = "stock-card";
 
-document.getElementById("stock-form").addEventListener("submit", function (event) {
-  event.preventDefault();
-  const appareil = {
-    nom: document.getElementById("stock-device-name").value.trim(),
-    marque: document.getElementById("stock-brand").value.trim(),
-    prix: Number(document.getElementById("stock-price").value),
-    type: document.getElementById("stock-category").value,
-  };
-  inventaire.push(appareil);
-  document.getElementById("stock-form").reset();
-  afficherInventaire();
-});</code></pre>
+    const media = document.createElement("div");
+    media.className = "stock-card-media";
+    if (a.imageUrl &amp;&amp; a.imageUrl.trim() !== "") {
+      const img = document.createElement("img");
+      img.src = a.imageUrl.trim();
+      img.alt = "Photo de " + a.modele;
+      media.appendChild(img);
+    } else {
+      const ph = document.createElement("div");
+      ph.className = "stock-card-photo-placeholder";
+      ph.textContent = "📱";
+      media.appendChild(ph);
+    }
+    card.appendChild(media);
+
+    const body = document.createElement("div");
+    body.className = "stock-card-body";
+    const titre = document.createElement("h3");
+    titre.textContent = a.modele;
+    body.appendChild(titre);
+    /* … paragraphes marque, catégorie, prix, quantité avec .textContent … */
+    zone.appendChild(card);
+  }
+}</code></pre>
             </div>
           </div>
+        </section>
+
+        <section class="panel stock-cartes-column" aria-labelledby="stock-cartes-title">
+          <h2 id="stock-cartes-title">Inventaire (cartes)</h2>
+          <div id="stock-cartes" class="stock-cartes" aria-label="Appareils en stock"></div>
         </section>
       </div>
 

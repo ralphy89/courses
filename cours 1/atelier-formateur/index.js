@@ -51,21 +51,21 @@ stockForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   // TODO élèves :
-  // 1) Lire les champs #stock-device-name, #stock-brand, #stock-price, #stock-category
-  // 2) const appareil = { nom: ..., marque: ..., prix: Number(...), type: ... }
-  // 3) inventaire.push(appareil)
-  // 4) stockForm.reset() puis afficherInventaire()
+  // 1) Lire #phone-image, #phone-modele, #phone-marque, #phone-categorie, #phone-prix, #phone-quantite
+  // 2) if (...) { message dans #stock-erreur ; return }
+  // 3) inventaire.push({ imageUrl, modele, marque, categorie, prix, quantite })
+  // 4) vider #stock-erreur, stockForm.reset(), afficherCartes()
 
   document.getElementById("stock-count").textContent =
-    "À vous : complétez l’exercice 2 (objet + push + afficherInventaire).";
+    "À vous : complétez l’exercice 2 (objet + push + afficherCartes).";
 });
 
-function afficherInventaire() {
+function afficherCartes() {
   // TODO élèves :
-  // const liste = document.getElementById("stock-list")
-  // liste.innerHTML = ""
-  // document.getElementById("stock-count").textContent = inventaire.length + " appareil(s)..."
-  // for (let i = 0; i < inventaire.length; i++) { ... createElement("li") ... liste.appendChild(li) }
+  // const zone = document.getElementById("stock-cartes")
+  // zone.innerHTML = ""
+  // #stock-count avec inventaire.length
+  // for (...) { article.stock-card, .stock-card-media (img ou placeholder), .stock-card-body ... }
 }
 
 /* Afficher / masquer les blocs correction */
@@ -76,7 +76,7 @@ function bindCorrectionToggle(buttonId, blockId) {
 
   const closedLabel =
     buttonId === "toggle-correction-2"
-      ? "Afficher une correction possible (liste + objets)"
+      ? "Afficher une correction possible (cartes + image)"
       : "Afficher une correction possible (script)";
 
   btn.addEventListener("click", function () {

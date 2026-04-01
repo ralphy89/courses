@@ -54,6 +54,10 @@ body {
   padding: 2rem 1.25rem 3rem;
 }
 
+.page--stock {
+  max-width: min(56rem, 100%);
+}
+
 .page-header {
   display: flex;
   flex-wrap: wrap;
@@ -111,6 +115,43 @@ h1 {
   }
 }
 
+.instructions--full {
+  margin-bottom: 1.5rem;
+}
+
+.stock-workspace {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .stock-workspace {
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  }
+}
+
+.stock-form-column {
+  position: sticky;
+  top: 1rem;
+}
+
+@media (max-width: 899px) {
+  .stock-form-column {
+    position: static;
+  }
+}
+
+.stock-cartes-column h2 {
+  margin-bottom: 0.65rem;
+}
+
+.stock-count-form {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -165,6 +206,7 @@ form label:first-of-type {
 
 input[type="text"],
 input[type="number"],
+input[type="url"],
 select {
   width: 100%;
   padding: 0.6rem 0.75rem;
@@ -312,44 +354,132 @@ h2.exo-title {
   font-size: 0.95rem;
 }
 
-#stock-count {
-  margin: 1rem 0 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-#stock-list {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
-  min-height: 4rem;
-}
-
-#stock-list:empty::before {
-  content: "Aucun appareil — le tableau est vide ([]).";
-  display: block;
-  padding: 1rem;
-  color: var(--muted);
-  font-family: var(--font);
+.stock-erreur {
+  margin: 0.75rem 0 0;
+  min-height: 1.2em;
   font-size: 0.88rem;
+  color: #f87171;
 }
 
-#stock-list li {
-  padding: 0.65rem 1rem;
+html[data-theme="light"] .stock-erreur {
+  color: #dc2626;
+}
+
+.stock-cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  min-height: 6rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.stock-cartes:empty::before {
+  content: "Aucun appareil — le tableau inventaire est vide ([]).";
+  display: block;
+  grid-column: 1 / -1;
+  padding: 1.25rem;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.stock-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+.stock-card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
 }
 
-#stock-list li:last-child {
-  border-bottom: none;
+.stock-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-#stock-list li strong {
-  color: var(--accent);
+.stock-card-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--muted);
+  background: linear-gradient(145deg, var(--accent-dim), var(--bg));
+}
+
+.stock-card-body {
+  padding: 0.85rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.stock-card-body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.stock-card-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.stock-card-meta strong {
+  color: var(--text);
   font-weight: 600;
+}
+
+.stock-card-price {
+  margin: 0.15rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.stock-card-qty {
+  margin: 0.35rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.stock-card-qty span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ok);
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .footer-link-corrige {
@@ -422,7 +552,3 @@ h2.exo-title {
   }
 }
 
-#stock-list li {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
