@@ -234,12 +234,134 @@ form.addEventListener("submit", function (event) {
   }
 });</code></pre>
 
-            <h3>Exercice 2 — correction QCM</h3>
+            <h3>Exercice 2 — correction QCM (questions créées en JavaScript)</h3>
             <p>
-              Adaptez <code>bonnesReponses</code> au contenu réel des questions. HTML : <code>name="q1"</code> …
-              <code>name="q4"</code>, <code>value</code> parmi <code>a</code>, <code>b</code>, <code>c</code>.
+              Dans cette version, le <strong>tableau <code>questions</code></strong> décrit tout le questionnaire ; une fonction
+              construit les <code>&lt;fieldset&gt;</code> et les radios avec <code>createElement</code>, puis les injecte dans
+              <code>#qcm-zone</code>. Seuls <code>getElementById</code> et <code>getElementsByName</code> sont utilisés.
             </p>
-            <pre><code>const bonnesReponses = ["a", "b", "a", "c"]; // à adapter à VOS bonnes réponses
+            <p>
+              <strong>HTML minimal</strong> (le reste est généré au chargement) : un conteneur vide, le bouton et la zone de
+              score — par ex. entre le titre et la fin de la page :
+            </p>
+            <pre><code>&lt;div id="qcm-zone"&gt;&lt;/div&gt;
+&lt;button type="button" id="btn-resultat"&gt;Voir mon score&lt;/button&gt;
+&lt;div id="resultat"&gt;&lt;/div&gt;
+&lt;script src="qcm.js"&gt;&lt;/script&gt;</code></pre>
+
+            <pre><code>const questions = [
+  {
+    id: "q1",
+    texte: "Que signifie HTML ?",
+    choix: [
+      { label: "HyperText Markup Language", correct: true },
+      { label: "High Tech Modern Language", correct: false },
+      { label: "Home Tool Markup Language", correct: false },
+    ],
+  },
+  {
+    id: "q2",
+    texte: "À quoi sert surtout le CSS ?",
+    choix: [
+      { label: "Exécuter des calculs sur le serveur", correct: false },
+      { label: "Décrire la présentation (couleurs, mise en page…)", correct: true },
+      { label: "Stocker des données SQL", correct: false },
+    ],
+  },
+  {
+    id: "q3",
+    texte: "Quel mot-clé déclare une constante en JavaScript ?",
+    choix: [
+      { label: "const", correct: true },
+      { label: "variable", correct: false },
+      { label: "fixed", correct: false },
+    ],
+  },
+  {
+    id: "q4",
+    texte: "Pourquoi appelle-t-on souvent event.preventDefault() sur un formulaire ?",
+    choix: [
+      { label: "Pour supprimer le formulaire du DOM", correct: false },
+      { label: "Pour désactiver le clavier", correct: false },
+      { label: "Pour éviter le rechargement de la page", correct: true },
+    ],
+  },
+];
+
+function construireQcm() {
+  const conteneur = document.getElementById("qcm-zone");
+  conteneur.textContent = "";
+
+  for (let qi = 0; qi &lt; questions.length; qi++) {
+    const q = questions[qi];
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "qcm-fieldset";
+
+    const legend = document.createElement("legend");
+    legend.textContent = q.texte;
+    fieldset.appendChild(legend);
+
+    for (let ci = 0; ci &lt; q.choix.length; ci++) {
+      const c = q.choix[ci];
+      const idRadio = q.id + "-" + ci;
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = q.id;
+      radio.id = idRadio;
+      radio.value = String(ci);
+      radio.dataset.correct = c.correct ? "1" : "0";
+
+      const lab = document.createElement("label");
+      lab.htmlFor = idRadio;
+      lab.appendChild(radio);
+      lab.appendChild(document.createTextNode(" " + c.label));
+      fieldset.appendChild(lab);
+    }
+
+    conteneur.appendChild(fieldset);
+  }
+}
+
+function scoreQcm() {
+  let score = 0;
+  for (let i = 0; i &lt; questions.length; i++) {
+    const q = questions[i];
+    const liste = document.getElementsByName(q.id);
+    let choisi = null;
+    for (let j = 0; j &lt; liste.length; j++) {
+      if (liste[j].checked) {
+        choisi = liste[j];
+        break;
+      }
+    }
+    if (choisi &amp;&amp; choisi.dataset.correct === "1") {
+      score++;
+    }
+  }
+  return score;
+}
+
+construireQcm();
+
+document.getElementById("btn-resultat").addEventListener("click", function () {
+  const s = scoreQcm();
+  document.getElementById("resultat").textContent =
+    "Score : " + s + " / " + questions.length;
+});</code></pre>
+
+            <div class="info">
+              Chaque radio reçoit <code>data-correct="1"</code> ou <code>"0"</code> (<code>radio.dataset.correct</code>) : la
+              correction lit la réponse cochée avec <code>getElementsByName</code>, sans tableau
+              <code>bonnesReponses</code> séparé.
+            </div>
+
+            <h3>Exercice 2 — autre variante (questions écrites à la main en HTML)</h3>
+            <p>
+              Si les <code>&lt;fieldset&gt;</code> sont dans le fichier HTML avec <code>name="q1"</code> … et
+              <code>value</code> <code>a</code>/<code>b</code>/<code>c</code>, utilisez un tableau
+              <code>bonnesReponses</code> aligné sur vos bonnes réponses :
+            </p>
+            <pre><code>const bonnesReponses = ["a", "b", "a", "c"]; // à adapter
 
 function radioCoche(nom) {
   const liste = document.getElementsByName(nom);
@@ -252,11 +374,8 @@ function radioCoche(nom) {
 function scoreQcm() {
   let score = 0;
   for (let i = 0; i &lt; bonnesReponses.length; i++) {
-    const nom = "q" + (i + 1);
-    const choix = radioCoche(nom);
-    if (choix &amp;&amp; choix.value === bonnesReponses[i]) {
-      score++;
-    }
+    const choix = radioCoche("q" + (i + 1));
+    if (choix &amp;&amp; choix.value === bonnesReponses[i]) score++;
   }
   return score;
 }
@@ -274,7 +393,7 @@ document.getElementById("btn-resultat").addEventListener("click", function () {
               <li><code>form.addEventListener("submit", …)</code> + <code>event.preventDefault()</code></li>
               <li>Lecture des champs : <code>getElementById("…").value</code>, <code>getElementsByName("…")</code> + boucle sur <code>.checked</code></li>
               <li>Feedback utilisateur : <code>textContent</code>, classes CSS</li>
-              <li>QCM : HTML des questions + tableau <code>bonnesReponses</code> + <code>name</code> sur les radios</li>
+              <li>QCM : soit tableau <code>questions</code> + génération DOM, soit HTML statique + <code>bonnesReponses</code></li>
             </ul>
             <div class="success">
               Pour aller plus loin : envoi réel des données avec <code>fetch</code> vers une API, validation HTML5
