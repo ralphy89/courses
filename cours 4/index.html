@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript — Projet To-Do List</title>
+    <link rel="stylesheet" href="assets/course.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="hero">
+        <span class="eyebrow">Cours JavaScript • 4 • Projet</span>
+        <h1>Projet — To‑Do List</h1>
+        <p>
+          Construisez une application web simple pour <strong>gérer une liste de tâches</strong> : ajouter, afficher,
+          supprimer. Bonus : terminer, vider la liste, sauvegarder avec <code>localStorage</code>.
+        </p>
+
+        <div class="hero-grid">
+          <div class="card pad">
+            <h3>Thèmes</h3>
+            <div class="tag-row">
+              <span class="tag">DOM</span>
+              <span class="tag">createElement</span>
+              <span class="tag">appendChild</span>
+              <span class="tag">addEventListener</span>
+              <span class="tag">tableaux</span>
+              <span class="tag">fonctions</span>
+              <span class="tag">localStorage (bonus)</span>
+            </div>
+            <div class="info mt-18">
+              Durée indicative : <strong>2h</strong> (1h30 dev + 30 min présentation).
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h3>Objectif</h3>
+            <div class="quick-list">
+              <div class="quick-item">
+                <strong>Ajouter</strong>
+                Saisir une tâche et l’ajouter à la liste.
+              </div>
+              <div class="quick-item">
+                <strong>Afficher</strong>
+                Voir toutes les tâches dans la page.
+              </div>
+              <div class="quick-item">
+                <strong>Supprimer</strong>
+                Retirer une tâche de la liste.
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="section-grid">
+        <aside class="card sidebar">
+          <h3>Sommaire</h3>
+          <nav class="nav-links">
+            <a href="#intro">Introduction</a>
+            <a href="#spec">Spécifications</a>
+            <a href="#plan">Plan de réalisation</a>
+            <a href="#bonus">Bonus</a>
+            <a href="#presentation">Présentation &amp; évaluation</a>
+            <a href="#aide">Aide (rappels DOM)</a>
+            <a href="#recap">Récap &amp; suite</a>
+            <a href="templates-eleves/index.html">Template élève</a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section id="intro" class="card">
+            <h2>Introduction</h2>
+            <p>
+              Dans ce projet, vous allez gérer une <strong>liste de tâches</strong> dans un tableau JavaScript, puis
+              afficher ce tableau dans le HTML en créant des éléments avec le DOM.
+            </p>
+            <div class="success">
+              Template de départ : ouvrez <code>cours 4/templates-eleves/</code> puis lancez <code>todo.html</code>.
+              <a href="templates-eleves/index.html">Ouvrir le template élève</a>.
+            </div>
+          </section>
+
+          <section id="spec" class="card">
+            <h2>Spécifications (obligatoires)</h2>
+
+            <h3>Fonctionnalités</h3>
+            <ul class="steps">
+              <li>Ajouter une tâche avec un champ texte et un bouton</li>
+              <li>Afficher la liste des tâches</li>
+              <li>Supprimer une tâche</li>
+            </ul>
+
+            <h3>Contraintes</h3>
+            <ul>
+              <li>Utiliser HTML, CSS et JavaScript</li>
+              <li>Utiliser des <strong>fonctions JavaScript</strong></li>
+              <li>Manipuler le DOM (ex : <code>createElement</code>, <code>appendChild</code>)</li>
+              <li>Organiser le code de manière claire</li>
+            </ul>
+
+            <div class="warning">
+              Conseil : commencez par la logique JavaScript (ajout/affichage/suppression) puis améliorez le design.
+            </div>
+          </section>
+
+          <section id="plan" class="card">
+            <h2>Plan de réalisation (recommandé)</h2>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>1) Modèle de données</h4>
+                <p>Un tableau <code>taches</code> de chaînes (ou d’objets si bonus terminé).</p>
+              </div>
+              <div class="mini-card">
+                <h4>2) Affichage</h4>
+                <p>Une fonction <code>afficherTaches()</code> qui vide la liste puis recrée les éléments.</p>
+              </div>
+              <div class="mini-card">
+                <h4>3) Ajout</h4>
+                <p>Lire le champ, <code>trim()</code>, pousser dans le tableau, puis rafraîchir.</p>
+              </div>
+              <div class="mini-card">
+                <h4>4) Suppression</h4>
+                <p>Un bouton « Supprimer » par tâche (avec l’index), puis rafraîchir.</p>
+              </div>
+            </div>
+
+            <h3>Structure HTML minimale</h3>
+            <pre><code>&lt;form id="todo-form"&gt;
+  &lt;input id="todo-input" type="text" /&gt;
+  &lt;button type="submit"&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;
+&lt;ul id="todo-list"&gt;&lt;/ul&gt;</code></pre>
+
+            <h3>Exemple de création d’un élément</h3>
+            <pre><code>const li = document.createElement("li");
+const p = document.createElement("p");
+p.textContent = "Ma tâche";
+li.appendChild(p);</code></pre>
+          </section>
+
+          <section id="bonus" class="card">
+            <h2>Bonus (pour les plus rapides)</h2>
+            <ul class="steps">
+              <li>Marquer une tâche comme terminée</li>
+              <li>Ajouter un bouton « Vider la liste »</li>
+              <li>Sauvegarder les tâches avec <code>localStorage</code></li>
+            </ul>
+            <div class="info">
+              Astuce : pour la sauvegarde, pensez à <code>JSON.stringify</code> / <code>JSON.parse</code>.
+            </div>
+          </section>
+
+          <section id="presentation" class="card">
+            <h2>Présentation (obligatoire) &amp; évaluation</h2>
+
+            <h3>À présenter</h3>
+            <ul>
+              <li>Votre application</li>
+              <li>Le fonctionnement du code</li>
+              <li>Les fonctionnalités réalisées (obligatoires + bonus)</li>
+            </ul>
+
+            <h3>Critères d’évaluation</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Critère</th>
+                    <th>Attendu</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Fonctionnalités</td>
+                    <td>Ajout, affichage, suppression</td>
+                  </tr>
+                  <tr>
+                    <td>JavaScript</td>
+                    <td>Fonctions, DOM, événements</td>
+                  </tr>
+                  <tr>
+                    <td>Clarté du code</td>
+                    <td>Noms, structure, lisibilité</td>
+                  </tr>
+                  <tr>
+                    <td>Présentation</td>
+                    <td>Explications et démo</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="aide" class="card">
+            <h2>Aide (rappels DOM rapides)</h2>
+            <ul>
+              <li>Lire un champ : <code>document.getElementById("todo-input").value</code></li>
+              <li>Vider une liste : <code>liste.textContent = ""</code></li>
+              <li>Créer : <code>document.createElement("li")</code></li>
+              <li>Ajouter : <code>parent.appendChild(enfant)</code></li>
+              <li>Écouter un clic : <code>bouton.addEventListener("click", ...)</code></li>
+            </ul>
+            <div class="success">
+              Référence : <a href="https://developer.mozilla.org/fr/">MDN Web Docs</a>.
+            </div>
+          </section>
+
+          <section id="recap" class="card">
+            <h2>Récap &amp; suite</h2>
+            <ul>
+              <li>Un tableau JS = la source de vérité</li>
+              <li><code>afficherTaches()</code> reconstruit l’UI à partir du tableau</li>
+              <li>Les événements (submit/click) modifient le tableau, puis rafraîchissent</li>
+            </ul>
+            <div class="info">
+              Suite possible : filtres (tout / fait / à faire), recherche, dates, priorité, drag &amp; drop, sauvegarde.
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercice 1 — Connexion</title>
+    <title>Exercice 1 — Connexion (template)</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -11,54 +11,37 @@
       <nav class="exo-nav" aria-label="Navigation">
         <a href="index.html">← Accueil</a>
         <span class="exo-nav-sep">·</span>
-        <a href="qcm.html">Exercice 2 (QCM) →</a>
+        <a href="qcm.html">Exercice 2 →</a>
       </nav>
 
       <header class="page-header">
         <div class="titles">
-          <h1>Exercice 1 — Connexion</h1>
+          <h1>Exercice 1 — Page de connexion</h1>
           <p class="subtitle">
-            Interface prête : vous codez la logique dans <code>connexion.js</code> (identifiants factices, messages).
+            Le HTML est prêt. À vous de compléter <code>connexion.js</code>.
           </p>
         </div>
       </header>
 
-      <p class="exo-lead">
-        Fichier à compléter : <code>connexion.js</code> — utilisez <code>document.getElementById</code> uniquement (pas de
-        <code>querySelector</code>).
-      </p>
+      <section class="panel connexion-card">
+        <h2 class="exo-title">Connexion</h2>
+        <p class="exo-lead">Identifiants factices (à vérifier en JavaScript).</p>
 
-      <div class="layout">
-        <section class="panel instructions" aria-labelledby="consignes-cnx">
-          <h2 id="consignes-cnx">Rappel des consignes</h2>
-          <ol>
-            <li>À la soumission du formulaire : <code>preventDefault</code>.</li>
-            <li>Champs vides → message d’erreur dans <code>#message</code> (classe <code>msg-erreur</code>).</li>
-            <li>
-              Sinon, tester <code>login === "demo"</code> et mot de passe <code>=== "code123"</code> (ou changez ces valeurs
-              dans le script, en cohérence avec le cours).
-            </li>
-            <li>Succès → texte positif et classe <code>msg-succes</code> ; échec → message d’erreur.</li>
-          </ol>
-        </section>
+        <form id="login-form" autocomplete="off">
+          <label for="login">Identifiant</label>
+          <input id="login" type="text" placeholder="ex. demo" required />
 
-        <section class="panel connexion-card" aria-labelledby="titre-form">
-          <h2 id="titre-form">Se connecter</h2>
-          <form id="login-form" novalidate>
-            <label for="login">Identifiant</label>
-            <input type="text" id="login" name="login" autocomplete="username" />
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" placeholder="ex. code123" required />
 
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" autocomplete="current-password" />
+          <button type="submit">Se connecter</button>
+        </form>
 
-            <button type="submit">Se connecter</button>
-          </form>
-          <p id="message" aria-live="polite"></p>
-        </section>
-      </div>
+        <p id="message" aria-live="polite"></p>
+      </section>
 
       <footer>
-        <p><code>connexion.html</code> + <code>connexion.js</code> + <code>style.css</code></p>
+        <p>Script : <code>connexion.js</code></p>
       </footer>
     </div>
 

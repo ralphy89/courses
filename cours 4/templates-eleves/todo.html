@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet — To‑Do List (template)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <nav class="exo-nav" aria-label="Navigation">
+        <a href="index.html">← Accueil</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Projet — To‑Do List</h1>
+          <p class="subtitle">
+            Objectif : ajouter, afficher et supprimer des tâches. Bonus : terminer, vider, sauvegarder.
+          </p>
+        </div>
+      </header>
+
+      <div class="layout">
+        <section class="panel instructions">
+          <h2>Consignes</h2>
+          <ol>
+            <li>Quand on soumet le formulaire : ajouter la tâche au tableau.</li>
+            <li>Afficher la liste des tâches dans <code>#todo-list</code>.</li>
+            <li>Chaque tâche a un bouton « Supprimer ».</li>
+            <li>Bonus : bouton « Terminer » + bouton « Vider la liste » + <code>localStorage</code>.</li>
+          </ol>
+          <div class="info">
+            Script à compléter : <code>todo.js</code>. Évitez <code>innerHTML</code> pour générer la liste : utilisez
+            <code>createElement</code>.
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="todo-topbar">
+            <h2 class="exo-title">Mes tâches</h2>
+            <button type="button" class="todo-clear" id="todo-clear">Vider la liste</button>
+          </div>
+          <p class="todo-count" id="todo-count">0 tâche</p>
+
+          <form id="todo-form" class="todo-row" autocomplete="off">
+            <div>
+              <label for="todo-input">Nouvelle tâche</label>
+              <input id="todo-input" type="text" placeholder="Ex : acheter du pain" />
+            </div>
+            <button type="submit">Ajouter</button>
+          </form>
+
+          <p class="stock-erreur" id="todo-error" aria-live="polite"></p>
+
+          <ul id="todo-list" class="todo-list"></ul>
+        </section>
+      </div>
+
+      <footer>
+        <p>À rendre : <code>todo.html</code>, <code>todo.js</code>, <code>style.css</code>.</p>
+      </footer>
+    </div>
+
+    <script src="todo.js"></script>
+  </body>
+</html>

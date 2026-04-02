@@ -8,6 +8,15 @@
 
 let inventaire = [];
 
+function ligneMeta(cardBody, label, texte) {
+  const p = document.createElement("p");
+  p.className = "stock-card-meta";
+  const strong = document.createElement("strong");
+  strong.textContent = label;
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode(" — " + texte));
+  cardBody.appendChild(p);
+}
 const stockForm = document.getElementById("stock-form");
 
 stockForm.addEventListener("submit", function (event) {

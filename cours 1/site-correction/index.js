@@ -1,6 +1,3 @@
-/**
- * Version CORRIGÉE — à déployer sur le site formateur (référence + démo fonctionnelle).
- */
 
 const form = document.getElementById("device-form");
 
