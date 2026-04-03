@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript — 10 exercices d’entraînement</title>
+    <link rel="stylesheet" href="assets/course.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="hero">
+        <span class="eyebrow">Cours JavaScript • 5 • Entraînement guidé</span>
+        <h1>Dix exercices simples — révision des bases</h1>
+        <p>
+          Dix paires <strong>HTML + JS</strong> indépendantes, un seul <code>style.css</code> partagé. Chaque fichier est court :
+          une ou deux notions à mettre en pratique, sans piège.
+        </p>
+
+        <div class="hero-grid">
+          <div class="card pad">
+            <h3>Notions couvertes</h3>
+            <div class="tag-row">
+              <span class="tag">Variables</span>
+              <span class="tag">Nombres</span>
+              <span class="tag">if / else</span>
+              <span class="tag">for</span>
+              <span class="tag">Tableaux</span>
+              <span class="tag">Fonctions</span>
+              <span class="tag">Objets</span>
+              <span class="tag">Chaînes</span>
+              <span class="tag">DOM</span>
+              <span class="tag">Événements</span>
+              <span class="tag">Formulaire</span>
+            </div>
+            <div class="info mt-18">
+              Ouvrez le dossier <code>cours 5/templates-eleves/</code> : <code>index.html</code> liste les 10 exercices.
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h3>Organisation</h3>
+            <div class="quick-list">
+              <div class="quick-item">
+                <strong>10 × HTML</strong>
+                <code>exo1.html</code> … <code>exo10.html</code>
+              </div>
+              <div class="quick-item">
+                <strong>10 × JS</strong>
+                <code>exo1.js</code> … <code>exo10.js</code>
+              </div>
+              <div class="quick-item">
+                <strong>1 × CSS</strong>
+                <code>style.css</code> commun à tout le dossier
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="section-grid">
+        <aside class="card sidebar">
+          <h3>Sommaire</h3>
+          <nav class="nav-links">
+            <a href="#liste">Liste des exercices</a>
+            <a href="#conseils">Conseils</a>
+            <a href="templates-eleves/index.html">Dossier élève</a>
+          </nav>
+        </aside>
+
+        <main class="content">
+          <section id="liste" class="card">
+            <h2>Liste des 10 exercices</h2>
+            <p>Fichiers dans <code>templates-eleves/</code> — à compléter surtout côté JavaScript.</p>
+
+            <ol class="steps">
+              <li><strong>exo1</strong> — Variables <code>let</code> / <code>const</code>, texte dans la page (<code>textContent</code>).</li>
+              <li><strong>exo2</strong> — Nombres : lire un champ, convertir avec <code>Number()</code>, calcul simple.</li>
+              <li><strong>exo3</strong> — Conditions <code>if</code> / <code>else</code> (test sur une valeur saisie).</li>
+              <li><strong>exo4</strong> — Boucle <code>for</code> : construire une chaîne (ex. nombres de 1 à 10).</li>
+              <li><strong>exo5</strong> — Tableau : <code>push</code>, parcours, affichage de la liste.</li>
+              <li><strong>exo6</strong> — Fonction qui <code>return</code> une valeur ; appel depuis un bouton.</li>
+              <li><strong>exo7</strong> — Objet littéral <code>{ }</code>, accès aux propriétés <code>.</code></li>
+              <li><strong>exo8</strong> — Chaînes : <code>trim</code>, <code>length</code>, <code>toUpperCase</code>.</li>
+              <li><strong>exo9</strong> — Clic sur des boutons : <code>addEventListener</code>, modifier le DOM ou une classe.</li>
+              <li><strong>exo10</strong> — Formulaire : <code>submit</code>, <code>preventDefault</code>, lire plusieurs champs.</li>
+            </ol>
+
+            <div class="success">
+              <a href="templates-eleves/index.html">Ouvrir l’accueil des exercices (templates élève)</a>
+            </div>
+          </section>
+
+          <section id="conseils" class="card">
+            <h2>Conseils</h2>
+            <ul>
+              <li>Testez après chaque petite modification (rechargement de la page).</li>
+              <li>Utilisez <code>document.getElementById("…")</code> pour cibler les éléments déjà présents dans le HTML.</li>
+              <li>Préférez <code>textContent</code> pour afficher du texte utilisateur.</li>
+              <li>Gardez une fonction <code>function afficherMessage(msg) { … }</code> si cela vous aide à rester lisible.</li>
+            </ul>
+            <div class="info">
+              Référence : <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript">MDN — JavaScript</a>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

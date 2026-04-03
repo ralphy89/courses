@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 7 — Objets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo6.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo8.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 7 — Objet littéral</h1>
+          <p class="subtitle">Complétez <code>exo7.js</code> — propriétés <code>.</code></p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Créez un objet <code>film</code> avec au moins <code>titre</code> (chaîne) et <code>annee</code> (nombre).</li>
+          <li>Au clic sur « Afficher », mettez dans <code>#sortie</code> une phrase du type : <em>Film : … (…)</em></li>
+          <li>Utilisez <code>film.titre</code> et <code>film.annee</code>.</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <button type="button" class="exo-btn" id="btn-afficher">Afficher le film</button>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo7.js</code></p>
+      </footer>
+    </div>
+    <script src="exo7.js"></script>
+  </body>
+</html>

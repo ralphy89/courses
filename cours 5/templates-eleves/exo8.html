@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 8 — Chaînes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo7.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo9.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 8 — Chaînes de caractères</h1>
+          <p class="subtitle">Complétez <code>exo8.js</code> — <code>trim</code>, <code>length</code>, <code>toUpperCase</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Au clic sur « Analyser », lisez <code>#texte</code>.</li>
+          <li>Affichez dans <code>#sortie</code> (sur plusieurs lignes avec <code>\n</code>) :
+            <ul>
+              <li>la longueur après <code>trim()</code> ;</li>
+              <li>la version en <strong>majuscules</strong> du texte trimé.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-field-row">
+          <div>
+            <label for="texte">Texte</label>
+            <input id="texte" type="text" placeholder="  hello  " />
+          </div>
+          <button type="button" class="exo-btn" id="btn-analyser">Analyser</button>
+        </div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo8.js</code></p>
+      </footer>
+    </div>
+    <script src="exo8.js"></script>
+  </body>
+</html>

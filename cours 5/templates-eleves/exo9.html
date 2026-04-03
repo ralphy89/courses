@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 9 — Clics</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo8.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo10.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 9 — Événements &amp; classes</h1>
+          <p class="subtitle">Complétez <code>exo9.js</code> — <code>addEventListener</code>, <code>className</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Trois boutons changent la couleur de la zone <code>#zone-couleur</code>.</li>
+          <li>Au clic sur « Bleu », mettez <code>className</code> à <code>exo-zone exo-zone--bleu</code>.</li>
+          <li>« Vert » → <code>exo-zone exo-zone--vert</code> ; « Violet » → <code>exo-zone exo-zone--violet</code>.</li>
+          <li>Écrivez un court message dans <code>#sortie</code> indiquant la couleur active.</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-color-btns">
+          <button type="button" class="exo-btn exo-btn--ghost" id="btn-bleu">Bleu</button>
+          <button type="button" class="exo-btn exo-btn--ghost" id="btn-vert">Vert</button>
+          <button type="button" class="exo-btn exo-btn--ghost" id="btn-violet">Violet</button>
+        </div>
+        <div id="zone-couleur" class="exo-zone">Zone à recolorer</div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo9.js</code></p>
+      </footer>
+    </div>
+    <script src="exo9.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 10 — Formulaire</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo9.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 10 — Formulaire</h1>
+          <p class="subtitle">Complétez <code>exo10.js</code> — <code>submit</code>, <code>preventDefault</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Écoutez la soumission du formulaire <code>#contact-form</code>.</li>
+          <li>Appelez <code>event.preventDefault()</code> pour éviter le rechargement de la page.</li>
+          <li>Lisez <code>#pseudo</code> et <code>#detail</code> (pensez à <code>trim()</code> sur le pseudo).</li>
+          <li>Si le pseudo est vide, affichez un message d’erreur dans <code>#sortie</code>.</li>
+          <li>Sinon, affichez un petit récapitulatif (pseudo + texte du message).</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <form id="contact-form" autocomplete="off">
+          <label for="pseudo">Pseudo</label>
+          <input id="pseudo" type="text" placeholder="Votre pseudo" />
+
+          <label for="detail">Message</label>
+          <textarea id="detail" placeholder="Votre message…"></textarea>
+
+          <button type="submit" class="exo-btn exo-form-submit">Envoyer</button>
+        </form>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo10.js</code></p>
+      </footer>
+    </div>
+    <script src="exo10.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 5 — Tableaux</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo4.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo6.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 5 — Tableau</h1>
+          <p class="subtitle">Complétez <code>exo5.js</code> — <code>push</code>, <code>length</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Créez un tableau vide (liste de courses, prénoms, etc.).</li>
+          <li>Au clic sur « Ajouter », lisez le texte de <code>#item</code> (après <code>trim()</code>).</li>
+          <li>Si non vide, faites <code>push</code> dans le tableau.</li>
+          <li>Affichez dans <code>#sortie</code> le contenu du tableau (ex. une ligne par élément ou <code>join</code>).</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-field-row">
+          <div>
+            <label for="item">Élément à ajouter</label>
+            <input id="item" type="text" placeholder="ex. Pain" />
+          </div>
+          <button type="button" class="exo-btn" id="btn-ajouter">Ajouter</button>
+        </div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo5.js</code></p>
+      </footer>
+    </div>
+    <script src="exo5.js"></script>
+  </body>
+</html>

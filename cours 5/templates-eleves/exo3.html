@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 3 — if / else</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo2.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo4.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 3 — Conditions</h1>
+          <p class="subtitle">Complétez <code>exo3.js</code> — <code>if</code> / <code>else</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>L’utilisateur saisit un <strong>âge</strong> (nombre).</li>
+          <li>Si l’âge est <strong>≥ 18</strong>, affichez « Vous êtes majeur(e). »</li>
+          <li>Sinon, affichez « Vous êtes mineur(e). »</li>
+          <li>Gérez le cas où la saisie n’est pas un nombre valide (message simple).</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-field-row">
+          <div>
+            <label for="age">Âge</label>
+            <input id="age" type="number" min="0" max="120" placeholder="ex. 16" />
+          </div>
+          <button type="button" class="exo-btn" id="btn-tester">Tester</button>
+        </div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo3.js</code></p>
+      </footer>
+    </div>
+    <script src="exo3.js"></script>
+  </body>
+</html>

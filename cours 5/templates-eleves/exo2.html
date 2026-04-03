@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 2 — Nombres</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo1.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo3.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 2 — Nombres &amp; conversion</h1>
+          <p class="subtitle">Complétez <code>exo2.js</code> — <code>Number()</code>, lecture d’un champ.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Au clic sur « Calculer », lisez la valeur de <code>#nombre</code>.</li>
+          <li>Convertissez-la en nombre avec <code>Number(…)</code>.</li>
+          <li>Affichez dans <code>#sortie</code> le <strong>double</strong> de ce nombre (ex. « Le double de 5 est 10 »).</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-field-row">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" inputmode="decimal" placeholder="ex. 7" />
+          </div>
+          <button type="button" class="exo-btn" id="btn-calculer">Calculer</button>
+        </div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo2.js</code></p>
+      </footer>
+    </div>
+    <script src="exo2.js"></script>
+  </body>
+</html>

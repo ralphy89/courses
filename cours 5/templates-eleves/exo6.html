@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 6 — Fonctions</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page page--exo-wide">
+      <nav class="exo-nav" aria-label="Navigation entre exercices">
+        <a href="exo5.html">← Précédent</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="index.html">Accueil</a>
+        <span class="exo-nav-sep">·</span>
+        <a href="exo7.html">Suivant →</a>
+      </nav>
+
+      <header class="page-header">
+        <div class="titles">
+          <h1>Exercice 6 — Fonction</h1>
+          <p class="subtitle">Complétez <code>exo6.js</code> — <code>function</code>, <code>return</code>.</p>
+        </div>
+      </header>
+
+      <section class="panel instructions">
+        <h2>Consignes</h2>
+        <ol>
+          <li>Écrivez une fonction <code>carre(n)</code> qui retourne <code>n * n</code>.</li>
+          <li>Au clic sur « Calculer », lisez <code>#valeur</code>, convertissez en nombre, appelez <code>carre</code>.</li>
+          <li>Affichez le résultat dans <code>#sortie</code> (ex. « Le carré de 4 est 16 »).</li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2 class="exo-title">Votre travail</h2>
+        <div class="exo-field-row">
+          <div>
+            <label for="valeur">Nombre</label>
+            <input id="valeur" type="text" inputmode="numeric" placeholder="ex. 4" />
+          </div>
+          <button type="button" class="exo-btn" id="btn-carre">Calculer le carré</button>
+        </div>
+        <div id="sortie" class="exo-result" aria-live="polite"></div>
+      </section>
+
+      <footer>
+        <p><code>exo6.js</code></p>
+      </footer>
+    </div>
+    <script src="exo6.js"></script>
+  </body>
+</html>
